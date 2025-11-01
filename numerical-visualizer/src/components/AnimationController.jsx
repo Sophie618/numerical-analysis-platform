@@ -16,7 +16,7 @@ function AnimationController({ currentStep, totalSteps, onStepChange, isPlaying,
   const progress = totalSteps > 0 ? (currentStep / (totalSteps - 1)) * 100 : 0;
 
   return (
-    <div className="bg-white rounded-2xl p-6 shadow-md border border-neutral-200">
+    <div>
       <h2 className="text-sm font-semibold text-neutral-500 uppercase tracking-wider mb-4">动画控制</h2>
       
       <div className="bg-gradient-to-br from-neutral-50 to-neutral-100 rounded-2xl p-5 space-y-4 border border-neutral-200">

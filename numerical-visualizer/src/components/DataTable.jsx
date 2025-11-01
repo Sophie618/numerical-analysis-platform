@@ -140,11 +140,7 @@ function DataTable({ history, currentStep, method }) {
       return (
         <tr
           key={index}
-          className={`border-t border-neutral-200/50 transition-all ${
-            isActive
-              ? 'bg-secondary-100/40 font-bold border-l-4 border-l-secondary-500'
-              : 'hover:bg-white/50'
-          }`}
+          className="border-t border-neutral-200/50 transition-all hover:bg-secondary-100/40 hover:border-l-4 hover:border-l-secondary-500 cursor-pointer"
         >
           {cells}
         </tr>

@@ -85,7 +85,7 @@ function AlgorithmPage({ algorithmKey }) {
         <div className="bg-white rounded-2xl p-6 mb-6 shadow-md border border-neutral-200">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-3xl font-bold bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent mb-2">
+              <h2 className="text-3xl font-bold text-secondary-500 mb-2">
                 {algorithm.displayName}
               </h2>
               <p className="text-neutral-600">{algorithm.description}</p>
@@ -100,63 +100,69 @@ function AlgorithmPage({ algorithmKey }) {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-[400px_1fr] gap-6">
-          {/* Left Panel */}
-          <aside className="space-y-6">
-            {/* Function Input */}
-            <FunctionInput
-              onFunctionChange={setCurrentFunction}
-              onParametersChange={setParameters}
-            />
+          {/* Left Sidebar - Unified Container */}
+          <aside className="bg-white rounded-2xl shadow-lg border border-neutral-200 overflow-hidden">
+            <div className="divide-y divide-neutral-200">
+              {/* Function Input Section */}
+              <div className="p-6">
+                <FunctionInput
+                  onFunctionChange={setCurrentFunction}
+                  onParametersChange={setParameters}
+                />
+              </div>
 
-            {/* Animation Controller */}
-            <AnimationController
-              currentStep={currentStep}
-              totalSteps={history.length}
-              onStepChange={setCurrentStep}
-              isPlaying={isPlaying}
-              onPlayPause={() => setIsPlaying(!isPlaying)}
-              speed={speed}
-              onSpeedChange={setSpeed}
-            />
+              {/* Animation Controller Section */}
+              <div className="p-6">
+                <AnimationController
+                  currentStep={currentStep}
+                  totalSteps={history.length}
+                  onStepChange={setCurrentStep}
+                  isPlaying={isPlaying}
+                  onPlayPause={() => setIsPlaying(!isPlaying)}
+                  speed={speed}
+                  onSpeedChange={setSpeed}
+                />
+              </div>
 
-            {/* Results */}
-            {result && (
-              <div className="bg-white rounded-2xl p-6 shadow-md border border-neutral-200">
-                <h3 className="text-sm font-semibold text-neutral-500 uppercase tracking-wider mb-4">计算结果</h3>
-                <div className="space-y-3">
-                  <div className="flex justify-between items-center p-3 bg-secondary-50 rounded-xl border border-secondary-200">
-                    <span className="text-sm font-medium text-neutral-700">根</span>
-                    <span className="text-sm font-mono font-bold text-secondary-700">{result.root.toFixed(8)}</span>
-                  </div>
-                  <div className="flex justify-between items-center p-3 bg-primary-50 rounded-xl border border-primary-200">
-                    <span className="text-sm font-medium text-neutral-700">f(root)</span>
-                    <span className="text-sm font-mono font-bold text-primary-700">
-                      {result.fx ? result.fx.toExponential(4) : 'N/A'}
-                    </span>
-                  </div>
-                  <div className="flex justify-between items-center p-3 bg-secondary-50 rounded-xl border border-secondary-200">
-                    <span className="text-sm font-medium text-neutral-700">迭代次数</span>
-                    <span className="text-sm font-mono font-bold text-secondary-700">{result.iterations}</span>
-                  </div>
-                  <div className="flex justify-between items-center p-3 bg-neutral-50 rounded-xl border border-neutral-200">
-                    <span className="text-sm font-medium text-neutral-700">收敛状态</span>
-                    <span className={`text-sm font-bold ${result.converged ? 'text-secondary-600' : 'text-red-600'}`}>
-                      {result.converged ? '✓ 已收敛' : '✗ 未收敛'}
-                    </span>
+              {/* Results Section */}
+              {result && (
+                <div className="p-6">
+                  <h3 className="text-sm font-semibold text-neutral-500 uppercase tracking-wider mb-4">计算结果</h3>
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center p-3 bg-secondary-50 rounded-xl border border-secondary-200">
+                      <span className="text-sm font-medium text-neutral-700">根</span>
+                      <span className="text-sm font-mono font-bold text-secondary-700">{result.root.toFixed(8)}</span>
+                    </div>
+                    <div className="flex justify-between items-center p-3 bg-primary-50 rounded-xl border border-primary-200">
+                      <span className="text-sm font-medium text-neutral-700">f(root)</span>
+                      <span className="text-sm font-mono font-bold text-primary-700">
+                        {result.fx ? result.fx.toExponential(4) : 'N/A'}
+                      </span>
+                    </div>
+                    <div className="flex justify-between items-center p-3 bg-secondary-50 rounded-xl border border-secondary-200">
+                      <span className="text-sm font-medium text-neutral-700">迭代次数</span>
+                      <span className="text-sm font-mono font-bold text-secondary-700">{result.iterations}</span>
+                    </div>
+                    <div className="flex justify-between items-center p-3 bg-neutral-50 rounded-xl border border-neutral-200">
+                      <span className="text-sm font-medium text-neutral-700">收敛状态</span>
+                      <span className={`text-sm font-bold ${result.converged ? 'text-secondary-600' : 'text-red-600'}`}>
+                        {result.converged ? '✓ 已收敛' : '✗ 未收敛'}
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            )}
+              )}
 
-            {/* Export */}
-            <div className="bg-white rounded-2xl p-6 shadow-md border border-neutral-200">
-              <h3 className="text-sm font-semibold text-neutral-500 uppercase tracking-wider mb-4">数据导出</h3>
-              <ExportButton
-                history={history}
-                result={result}
-                method={algorithm.name}
-                functionName={currentFunction.name}
-              />
+              {/* Export Section */}
+              <div className="p-6">
+                <h3 className="text-sm font-semibold text-neutral-500 uppercase tracking-wider mb-4">数据导出</h3>
+                <ExportButton
+                  history={history}
+                  result={result}
+                  method={algorithm.name}
+                  functionName={currentFunction.name}
+                />
+              </div>
             </div>
           </aside>
 

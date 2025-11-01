@@ -80,9 +80,9 @@ function FunctionInput({ onFunctionChange, onParametersChange }) {
   };
 
   return (
-    <div className="bg-white rounded-2xl p-6 shadow-md border border-neutral-200 space-y-6">
+    <div className="space-y-6">
       <div>
-        <h2 className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-4">函数设置</h2>
+        <h2 className="text-sm font-semibold text-neutral-500 uppercase tracking-wider mb-4">函数设置</h2>
         <div className="space-y-3">
           <div>
             <label className="block text-sm font-medium text-slate-700 mb-2">预设函数</label>
