@@ -80,31 +80,13 @@ function AlgorithmPage({ algorithmKey }) {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-neutral-50 to-neutral-100">
-      <div className="max-w-[1800px] mx-auto p-6">
-        {/* Page Header */}
-        <div className="bg-white rounded-2xl p-6 mb-6 shadow-md border border-neutral-200">
-          <div className="flex items-center justify-between">
-            <div>
-              <h2 className="text-3xl font-bold text-secondary-500 mb-2">
-                {algorithm.displayName}
-              </h2>
-              <p className="text-neutral-600">{algorithm.description}</p>
-            </div>
-            <div className="flex items-center gap-4">
-              <div className="text-right">
-                <div className="text-sm text-neutral-500">收敛阶</div>
-                <div className="text-2xl font-bold text-primary-600">{algorithm.convergenceOrder}</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-[400px_1fr] gap-6">
+      <div className="flex">
+        <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] w-full">
           {/* Left Sidebar - Unified Container */}
-          <aside className="bg-white rounded-2xl shadow-lg border border-neutral-200 overflow-hidden">
-            <div className="divide-y divide-neutral-200">
+          <aside className="bg-white min-h-screen shadow-lg border-r border-neutral-200 overflow-y-auto">
+            <div>
               {/* Function Input Section */}
-              <div className="p-6">
+              <div className="p-6 border-b border-neutral-200">
                 <FunctionInput
                   onFunctionChange={setCurrentFunction}
                   onParametersChange={setParameters}
@@ -112,7 +94,7 @@ function AlgorithmPage({ algorithmKey }) {
               </div>
 
               {/* Animation Controller Section */}
-              <div className="p-6">
+              <div className="p-6 border-b border-neutral-200">
                 <AnimationController
                   currentStep={currentStep}
                   totalSteps={history.length}
@@ -126,7 +108,7 @@ function AlgorithmPage({ algorithmKey }) {
 
               {/* Results Section */}
               {result && (
-                <div className="p-6">
+                <div className="p-6 border-b border-neutral-200">
                   <h3 className="text-sm font-semibold text-neutral-500 uppercase tracking-wider mb-4">计算结果</h3>
                   <div className="space-y-3">
                     <div className="flex justify-between items-center p-3 bg-secondary-50 rounded-xl border border-secondary-200">
@@ -167,7 +149,25 @@ function AlgorithmPage({ algorithmKey }) {
           </aside>
 
           {/* Right Panel - Visualizations */}
-          <main className="space-y-6">
+          <main className="p-6 space-y-6">
+            {/* Page Header */}
+            <div className="bg-white rounded-2xl p-6 shadow-md border border-neutral-200">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h2 className="text-3xl font-bold text-secondary-500 mb-2">
+                    {algorithm.displayName}
+                  </h2>
+                  <p className="text-neutral-600">{algorithm.description}</p>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="text-right">
+                    <div className="text-sm text-neutral-500">收敛阶</div>
+                    <div className="text-2xl font-bold text-primary-600">{algorithm.convergenceOrder}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <FunctionPlot
               func={currentFunction.f}
               history={history}
