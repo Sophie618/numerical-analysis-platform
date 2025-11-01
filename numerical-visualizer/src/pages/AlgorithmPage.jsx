@@ -190,11 +190,10 @@ function AlgorithmPage({ algorithmKey }) {
                 xRange={[parameters.x0 - 2, parameters.x1 + 2]}
               />
               <ConvergenceChart history={history} currentStep={currentStep} />
-              <DataTable
-                history={history}
-                currentStep={currentStep}
-                method={algorithm.name}
-              />
+            <DataTable
+              history={history}
+              method={algorithm.name}
+            />
             </div>
           </main>
         </div>

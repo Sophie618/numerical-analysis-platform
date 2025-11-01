@@ -1,4 +1,4 @@
-function DataTable({ history, currentStep, method }) {
+function DataTable({ history, method }) {
   if (!history || history.length === 0) {
     return (
       <div className="glass rounded-3xl p-6 shadow-xl border border-white/40">
