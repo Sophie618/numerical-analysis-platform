@@ -152,15 +152,15 @@ function AlgorithmPage({ algorithmKey }) {
           <main className="p-6 space-y-6">
             {/* Page Header */}
             <div className="bg-white rounded-2xl p-6 shadow-md border border-neutral-200">
-              <div className="flex items-center justify-between">
-                <div>
+              <div className="flex items-center gap-12">
+                <div className="flex-1">
                   <h2 className="text-3xl font-bold text-secondary-500 mb-2">
                     {algorithm.displayName}
                   </h2>
                   <p className="text-neutral-600">{algorithm.description}</p>
                 </div>
-                <div className="flex items-center gap-4">
-                  <div className="text-right">
+                <div className="flex items-center">
+                  <div className="text-center">
                     <div className="text-sm text-neutral-500">收敛阶</div>
                     <div className="text-2xl font-bold text-primary-600">{algorithm.convergenceOrder}</div>
                   </div>
