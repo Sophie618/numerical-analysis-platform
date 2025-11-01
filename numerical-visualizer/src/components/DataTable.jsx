@@ -142,7 +142,7 @@ function DataTable({ history, currentStep, method }) {
           key={index}
           className={`border-t border-neutral-200/50 transition-all ${
             isActive
-              ? 'bg-gradient-to-r from-primary-100/30 to-secondary-100/30 font-bold border-l-4 border-l-primary-500'
+              ? 'bg-secondary-100/40 font-bold border-l-4 border-l-secondary-500'
               : 'hover:bg-white/50'
           }`}
         >

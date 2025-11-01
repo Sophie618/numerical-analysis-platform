@@ -124,19 +124,19 @@ function AlgorithmPage({ algorithmKey }) {
               <div className="bg-white rounded-2xl p-6 shadow-md border border-neutral-200">
                 <h3 className="text-sm font-semibold text-neutral-500 uppercase tracking-wider mb-4">计算结果</h3>
                 <div className="space-y-3">
-                  <div className="flex justify-between items-center p-3 bg-gradient-to-r from-primary-50 to-primary-100/50 rounded-xl border border-primary-200">
+                  <div className="flex justify-between items-center p-3 bg-secondary-50 rounded-xl border border-secondary-200">
                     <span className="text-sm font-medium text-neutral-700">根</span>
-                    <span className="text-sm font-mono font-bold text-primary-700">{result.root.toFixed(8)}</span>
+                    <span className="text-sm font-mono font-bold text-secondary-700">{result.root.toFixed(8)}</span>
                   </div>
-                  <div className="flex justify-between items-center p-3 bg-gradient-to-r from-secondary-50 to-secondary-100/50 rounded-xl border border-secondary-200">
+                  <div className="flex justify-between items-center p-3 bg-primary-50 rounded-xl border border-primary-200">
                     <span className="text-sm font-medium text-neutral-700">f(root)</span>
-                    <span className="text-sm font-mono font-bold text-secondary-700">
+                    <span className="text-sm font-mono font-bold text-primary-700">
                       {result.fx ? result.fx.toExponential(4) : 'N/A'}
                     </span>
                   </div>
-                  <div className="flex justify-between items-center p-3 bg-gradient-to-r from-primary-50 to-secondary-50 rounded-xl border border-neutral-200">
+                  <div className="flex justify-between items-center p-3 bg-secondary-50 rounded-xl border border-secondary-200">
                     <span className="text-sm font-medium text-neutral-700">迭代次数</span>
-                    <span className="text-sm font-mono font-bold text-neutral-800">{result.iterations}</span>
+                    <span className="text-sm font-mono font-bold text-secondary-700">{result.iterations}</span>
                   </div>
                   <div className="flex justify-between items-center p-3 bg-neutral-50 rounded-xl border border-neutral-200">
                     <span className="text-sm font-medium text-neutral-700">收敛状态</span>

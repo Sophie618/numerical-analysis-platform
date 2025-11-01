@@ -22,7 +22,7 @@ function AnimationController({ currentStep, totalSteps, onStepChange, isPlaying,
       <div className="bg-gradient-to-br from-neutral-50 to-neutral-100 rounded-2xl p-5 space-y-4 border border-neutral-200">
         {/* Step Indicator */}
         <div className="text-center">
-          <span className="text-3xl font-bold bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">
+          <span className="text-3xl font-bold text-secondary-600">
             {currentStep + 1}
           </span>
           <span className="text-neutral-400 mx-2">/</span>
@@ -48,7 +48,7 @@ function AnimationController({ currentStep, totalSteps, onStepChange, isPlaying,
           <button 
             onClick={onPlayPause}
             disabled={totalSteps === 0}
-            className="p-4 rounded-2xl bg-gradient-to-r from-primary-500 to-secondary-500 text-white hover:scale-110 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200 shadow-lg"
+            className="p-4 rounded-2xl bg-secondary-500 hover:bg-secondary-600 text-white hover:scale-110 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200 shadow-lg"
           >
             {isPlaying ? '⏸' : '▶'}
           </button>
@@ -82,7 +82,7 @@ function AnimationController({ currentStep, totalSteps, onStepChange, isPlaying,
           className="h-2 bg-white/60 rounded-full overflow-hidden cursor-pointer hover:h-3 transition-all"
         >
           <div 
-            className="h-full bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full transition-all duration-300 shadow-lg"
+            className="h-full bg-primary-500 rounded-full transition-all duration-300 shadow-lg"
             style={{ width: `${progress}%` }}
           />
         </div>

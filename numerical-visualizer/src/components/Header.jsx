@@ -21,7 +21,7 @@ function Header() {
         <div className="flex items-center justify-between px-8 py-4">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-md group-hover:shadow-lg transition-shadow">
+            <div className="w-10 h-10 bg-secondary-500 rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-md group-hover:shadow-lg transition-shadow">
               NA
             </div>
             <div>
@@ -31,20 +31,24 @@ function Header() {
           </Link>
 
           {/* Navigation */}
-          <nav className="flex items-center gap-2">
-            {navItems.map((item) => (
-              <Link
-                key={item.path}
-                to={item.path}
-                className={`px-6 py-2 rounded-lg font-medium text-sm transition-all ${
-                  isActive(item.path)
-                    ? 'bg-gradient-to-r from-primary-500 to-secondary-500 text-white shadow-md'
-                    : 'text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900'
-                }`}
-              >
-                {item.label}
-              </Link>
-            ))}
+          <nav className="flex items-center gap-6">
+            {navItems.map((item, index) => {
+              // 交替使用绿色和橙色：首页-绿、二分法-橙、牛顿法-绿、埃特肯法-橙、弦截法-绿
+              const underlineColor = index % 2 === 0 ? 'border-secondary-500' : 'border-primary-500';
+              return (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  className={`px-2 py-2 font-medium text-sm transition-all border-b-2 ${
+                    isActive(item.path)
+                      ? `${underlineColor} text-neutral-900`
+                      : 'border-transparent text-neutral-600 hover:text-neutral-900'
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
           </nav>
 
           {/* Status Indicator */}

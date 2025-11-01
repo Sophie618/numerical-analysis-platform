@@ -9,7 +9,7 @@ function Home() {
       description: '通过不断二分区间来逼近根，稳定可靠，适用于连续函数',
       convergence: '线性收敛',
       icon: '📊',
-      color: 'from-primary-400 to-primary-600',
+      color: 'bg-secondary-500',
       features: ['稳定可靠', '需要区间', '保证收敛']
     },
     {
@@ -19,7 +19,7 @@ function Home() {
       description: '使用函数的切线逼近根，收敛速度最快，需要导数信息',
       convergence: '二次收敛',
       icon: '🚀',
-      color: 'from-secondary-400 to-secondary-600',
+      color: 'bg-primary-500',
       features: ['收敛最快', '需要导数', '初值敏感']
     },
     {
@@ -29,7 +29,7 @@ function Home() {
       description: '加速线性收敛序列的方法，适合慢收敛序列的加速',
       convergence: '二次收敛',
       icon: '⚡',
-      color: 'from-primary-500 to-secondary-500',
+      color: 'bg-secondary-500',
       features: ['加速收敛', '不需导数', '适合迭代']
     },
     {
@@ -39,7 +39,7 @@ function Home() {
       description: '使用割线代替切线，不需要导数，是牛顿法的变形',
       convergence: '超线性收敛',
       icon: '📈',
-      color: 'from-secondary-500 to-primary-500',
+      color: 'bg-primary-500',
       features: ['无需导数', '超线性', '平衡方案']
     }
   ];
@@ -82,7 +82,7 @@ function Home() {
               className="group bg-white rounded-2xl p-8 shadow-md hover:shadow-2xl transition-all duration-300 border border-neutral-200 hover:border-primary-300"
             >
               <div className="flex items-start gap-6">
-                <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${algo.color} flex items-center justify-center text-3xl shadow-lg group-hover:scale-110 transition-transform`}>
+                <div className={`w-16 h-16 rounded-xl ${algo.color} flex items-center justify-center text-3xl shadow-lg group-hover:scale-110 transition-transform`}>
                   {algo.icon}
                 </div>
                 <div className="flex-1">
@@ -95,14 +95,18 @@ function Home() {
                   <p className="text-sm text-neutral-500 mb-3">{algo.nameEn}</p>
                   <p className="text-neutral-600 mb-4 leading-relaxed">{algo.description}</p>
                   <div className="flex gap-2">
-                    {algo.features.map((feature, index) => (
-                      <span
-                        key={index}
-                        className="px-3 py-1 bg-gradient-to-r from-primary-50 to-secondary-50 text-xs font-medium text-neutral-700 rounded-lg"
-                      >
-                        {feature}
-                      </span>
-                    ))}
+                    {algo.features.map((feature, index) => {
+                      // 交替使用绿色和橙色浅色背景
+                      const bgColor = index % 2 === 0 ? 'bg-secondary-50' : 'bg-primary-50';
+                      return (
+                        <span
+                          key={index}
+                          className={`px-3 py-1 ${bgColor} text-xs font-medium text-neutral-700 rounded-lg`}
+                        >
+                          {feature}
+                        </span>
+                      );
+                    })}
                   </div>
                 </div>
                 <div className="text-primary-500 group-hover:translate-x-2 transition-transform">
