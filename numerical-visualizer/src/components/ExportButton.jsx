@@ -1,8 +1,3 @@
-import './ExportButton.css';
-
-/**
- * 数据导出按钮组件
- */
 function ExportButton({ history, result, method, functionName }) {
   const exportToCSV = () => {
     if (!history || history.length === 0) {
@@ -11,8 +6,6 @@ function ExportButton({ history, result, method, functionName }) {
     }
 
     let csvContent = '';
-    
-    // 添加元数据
     csvContent += `算法,${method}\n`;
     csvContent += `函数,${functionName}\n`;
     if (result) {
@@ -23,7 +16,6 @@ function ExportButton({ history, result, method, functionName }) {
     }
     csvContent += '\n';
 
-    // 根据不同算法生成不同的表头和数据
     switch (method) {
       case 'Bisection':
         csvContent += '步数,x_n,f(x_n),区间左端点,区间右端点,误差,收敛率\n';
@@ -31,21 +23,18 @@ function ExportButton({ history, result, method, functionName }) {
           csvContent += `${item.iteration},${item.x},${item.fx},${item.interval[0]},${item.interval[1]},${item.error},${item.convergenceRate || ''}\n`;
         });
         break;
-      
       case 'Newton':
         csvContent += '步数,x_n,f(x_n),f\'(x_n),x_n+1,误差,收敛率\n';
         history.forEach(item => {
           csvContent += `${item.iteration},${item.x},${item.fx},${item.dfx},${item.xNext},${item.error},${item.convergenceRate || ''}\n`;
         });
         break;
-      
       case 'Aitken':
         csvContent += '步数,x_n,x_n+1,x_n+2,x̂_n,误差,收敛率\n';
         history.forEach(item => {
           csvContent += `${item.iteration},${item.x},${item.x1},${item.x2},${item.xHat},${item.error},${item.convergenceRate || ''}\n`;
         });
         break;
-      
       case 'Secant':
         csvContent += '步数,x_n-1,x_n,f(x_n),x_n+1,误差,收敛率\n';
         history.forEach(item => {
@@ -54,15 +43,12 @@ function ExportButton({ history, result, method, functionName }) {
         break;
     }
 
-    // 创建下载链接
     const blob = new Blob(['\ufeff' + csvContent], { type: 'text/csv;charset=utf-8;' });
     const link = document.createElement('a');
     const url = URL.createObjectURL(blob);
-    
     link.setAttribute('href', url);
     link.setAttribute('download', `${method}_${Date.now()}.csv`);
     link.style.visibility = 'hidden';
-    
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -86,37 +72,34 @@ function ExportButton({ history, result, method, functionName }) {
     const blob = new Blob([jsonContent], { type: 'application/json' });
     const link = document.createElement('a');
     const url = URL.createObjectURL(blob);
-    
     link.setAttribute('href', url);
     link.setAttribute('download', `${method}_${Date.now()}.json`);
     link.style.visibility = 'hidden';
-    
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
   };
 
   return (
-    <div className="export-button-group">
+    <div className="flex gap-3">
       <button 
-        className="export-btn" 
         onClick={exportToCSV}
         disabled={!history || history.length === 0}
-        title="导出为 CSV"
+        className="flex-1 px-4 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl font-semibold text-sm hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-2"
       >
-        📊 导出 CSV
+        <span>📊</span>
+        <span>CSV</span>
       </button>
       <button 
-        className="export-btn" 
         onClick={exportToJSON}
         disabled={!history || history.length === 0}
-        title="导出为 JSON"
+        className="flex-1 px-4 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-xl font-semibold text-sm hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-2"
       >
-        📄 导出 JSON
+        <span>📄</span>
+        <span>JSON</span>
       </button>
     </div>
   );
 }
 
 export default ExportButton;
-

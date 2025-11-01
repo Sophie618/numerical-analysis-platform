@@ -1,156 +1,167 @@
-import './DataTable.css';
-
-/**
- * 数据表格组件
- * 显示迭代过程的详细数据
- */
 function DataTable({ history, currentStep, method }) {
   if (!history || history.length === 0) {
     return (
-      <div className="data-table-container">
-        <div className="chart-title">迭代数据表</div>
-        <div className="empty-state">
-          <p>暂无数据</p>
-          <p className="empty-hint">请选择算法和函数开始计算</p>
+      <div className="glass rounded-3xl p-6 shadow-xl border border-white/40">
+        <h2 className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-4">迭代数据表</h2>
+        <div className="flex flex-col items-center justify-center py-16 text-center">
+          <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center mb-4">
+            <span className="text-3xl">📊</span>
+          </div>
+          <p className="text-slate-600 font-medium">暂无数据</p>
+          <p className="text-slate-400 text-sm mt-2">请选择算法和函数开始计算</p>
         </div>
       </div>
     );
   }
 
-  // 根据不同算法显示不同的列
-  const renderTableHeaders = () => {
+  const formatNumber = (num) => {
+    if (num === null || num === undefined) return '-';
+    if (!isFinite(num)) return 'Inf';
+    return num.toFixed(6);
+  };
+
+  const formatInterval = (interval) => {
+    if (!interval) return '-';
+    return `[${interval[0].toFixed(4)}, ${interval[1].toFixed(4)}]`;
+  };
+
+  const renderHeaders = () => {
     switch (method) {
       case 'Bisection':
         return (
-          <tr>
-            <th>步数</th>
-            <th>x<sub>n</sub></th>
-            <th>f(x<sub>n</sub>)</th>
-            <th>区间</th>
-            <th>误差</th>
-            <th>收敛率</th>
-          </tr>
+          <>
+            <th className="px-4 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">步数</th>
+            <th className="px-4 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">x<sub>n</sub></th>
+            <th className="px-4 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">f(x<sub>n</sub>)</th>
+            <th className="px-4 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">区间</th>
+            <th className="px-4 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">误差</th>
+            <th className="px-4 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">收敛率</th>
+          </>
         );
       case 'Newton':
         return (
-          <tr>
-            <th>步数</th>
-            <th>x<sub>n</sub></th>
-            <th>f(x<sub>n</sub>)</th>
-            <th>f'(x<sub>n</sub>)</th>
-            <th>x<sub>n+1</sub></th>
-            <th>误差</th>
-            <th>收敛率</th>
-          </tr>
+          <>
+            <th className="px-4 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">步数</th>
+            <th className="px-4 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">x<sub>n</sub></th>
+            <th className="px-4 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">f(x<sub>n</sub>)</th>
+            <th className="px-4 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">f'(x<sub>n</sub>)</th>
+            <th className="px-4 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">x<sub>n+1</sub></th>
+            <th className="px-4 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">误差</th>
+            <th className="px-4 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">收敛率</th>
+          </>
         );
       case 'Aitken':
         return (
-          <tr>
-            <th>步数</th>
-            <th>x<sub>n</sub></th>
-            <th>x<sub>n+1</sub></th>
-            <th>x<sub>n+2</sub></th>
-            <th>x̂<sub>n</sub></th>
-            <th>误差</th>
-            <th>收敛率</th>
-          </tr>
+          <>
+            <th className="px-4 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">步数</th>
+            <th className="px-4 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">x<sub>n</sub></th>
+            <th className="px-4 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">x<sub>n+1</sub></th>
+            <th className="px-4 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">x<sub>n+2</sub></th>
+            <th className="px-4 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">x̂<sub>n</sub></th>
+            <th className="px-4 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">误差</th>
+            <th className="px-4 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">收敛率</th>
+          </>
         );
       case 'Secant':
         return (
-          <tr>
-            <th>步数</th>
-            <th>x<sub>n-1</sub></th>
-            <th>x<sub>n</sub></th>
-            <th>f(x<sub>n</sub>)</th>
-            <th>x<sub>n+1</sub></th>
-            <th>误差</th>
-            <th>收敛率</th>
-          </tr>
+          <>
+            <th className="px-4 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">步数</th>
+            <th className="px-4 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">x<sub>n-1</sub></th>
+            <th className="px-4 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">x<sub>n</sub></th>
+            <th className="px-4 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">f(x<sub>n</sub>)</th>
+            <th className="px-4 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">x<sub>n+1</sub></th>
+            <th className="px-4 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">误差</th>
+            <th className="px-4 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">收敛率</th>
+          </>
         );
       default:
         return null;
     }
   };
 
-  const renderTableRows = () => {
+  const renderRows = () => {
     return history.map((item, index) => {
       const isActive = index === currentStep;
       
-      const formatNumber = (num) => {
-        if (num === null || num === undefined) return '-';
-        if (!isFinite(num)) return 'Inf';
-        return num.toFixed(6);
-      };
+      const cells = (() => {
+        switch (method) {
+          case 'Bisection':
+            return (
+              <>
+                <td className="px-4 py-3">{item.iteration}</td>
+                <td className="px-4 py-3 font-mono text-sm">{formatNumber(item.x)}</td>
+                <td className="px-4 py-3 font-mono text-sm">{formatNumber(item.fx)}</td>
+                <td className="px-4 py-3 font-mono text-xs">{formatInterval(item.interval)}</td>
+                <td className="px-4 py-3 font-mono text-sm">{formatNumber(item.error)}</td>
+                <td className="px-4 py-3 font-mono text-sm">{formatNumber(item.convergenceRate)}</td>
+              </>
+            );
+          case 'Newton':
+            return (
+              <>
+                <td className="px-4 py-3">{item.iteration}</td>
+                <td className="px-4 py-3 font-mono text-sm">{formatNumber(item.x)}</td>
+                <td className="px-4 py-3 font-mono text-sm">{formatNumber(item.fx)}</td>
+                <td className="px-4 py-3 font-mono text-sm">{formatNumber(item.dfx)}</td>
+                <td className="px-4 py-3 font-mono text-sm">{formatNumber(item.xNext)}</td>
+                <td className="px-4 py-3 font-mono text-sm">{formatNumber(item.error)}</td>
+                <td className="px-4 py-3 font-mono text-sm">{formatNumber(item.convergenceRate)}</td>
+              </>
+            );
+          case 'Aitken':
+            return (
+              <>
+                <td className="px-4 py-3">{item.iteration}</td>
+                <td className="px-4 py-3 font-mono text-sm">{formatNumber(item.x)}</td>
+                <td className="px-4 py-3 font-mono text-sm">{formatNumber(item.x1)}</td>
+                <td className="px-4 py-3 font-mono text-sm">{formatNumber(item.x2)}</td>
+                <td className="px-4 py-3 font-mono text-sm">{formatNumber(item.xHat)}</td>
+                <td className="px-4 py-3 font-mono text-sm">{formatNumber(item.error)}</td>
+                <td className="px-4 py-3 font-mono text-sm">{formatNumber(item.convergenceRate)}</td>
+              </>
+            );
+          case 'Secant':
+            return (
+              <>
+                <td className="px-4 py-3">{item.iteration}</td>
+                <td className="px-4 py-3 font-mono text-sm">{formatNumber(item.xPrev)}</td>
+                <td className="px-4 py-3 font-mono text-sm">{formatNumber(item.x)}</td>
+                <td className="px-4 py-3 font-mono text-sm">{formatNumber(item.fx)}</td>
+                <td className="px-4 py-3 font-mono text-sm">{formatNumber(item.xNext)}</td>
+                <td className="px-4 py-3 font-mono text-sm">{formatNumber(item.error)}</td>
+                <td className="px-4 py-3 font-mono text-sm">{formatNumber(item.convergenceRate)}</td>
+              </>
+            );
+          default:
+            return null;
+        }
+      })();
 
-      const formatInterval = (interval) => {
-        if (!interval) return '-';
-        return `[${interval[0].toFixed(4)}, ${interval[1].toFixed(4)}]`;
-      };
-
-      switch (method) {
-        case 'Bisection':
-          return (
-            <tr key={index} className={isActive ? 'active' : ''}>
-              <td>{item.iteration}</td>
-              <td>{formatNumber(item.x)}</td>
-              <td>{formatNumber(item.fx)}</td>
-              <td className="interval-cell">{formatInterval(item.interval)}</td>
-              <td>{formatNumber(item.error)}</td>
-              <td>{formatNumber(item.convergenceRate)}</td>
-            </tr>
-          );
-        case 'Newton':
-          return (
-            <tr key={index} className={isActive ? 'active' : ''}>
-              <td>{item.iteration}</td>
-              <td>{formatNumber(item.x)}</td>
-              <td>{formatNumber(item.fx)}</td>
-              <td>{formatNumber(item.dfx)}</td>
-              <td>{formatNumber(item.xNext)}</td>
-              <td>{formatNumber(item.error)}</td>
-              <td>{formatNumber(item.convergenceRate)}</td>
-            </tr>
-          );
-        case 'Aitken':
-          return (
-            <tr key={index} className={isActive ? 'active' : ''}>
-              <td>{item.iteration}</td>
-              <td>{formatNumber(item.x)}</td>
-              <td>{formatNumber(item.x1)}</td>
-              <td>{formatNumber(item.x2)}</td>
-              <td>{formatNumber(item.xHat)}</td>
-              <td>{formatNumber(item.error)}</td>
-              <td>{formatNumber(item.convergenceRate)}</td>
-            </tr>
-          );
-        case 'Secant':
-          return (
-            <tr key={index} className={isActive ? 'active' : ''}>
-              <td>{item.iteration}</td>
-              <td>{formatNumber(item.xPrev)}</td>
-              <td>{formatNumber(item.x)}</td>
-              <td>{formatNumber(item.fx)}</td>
-              <td>{formatNumber(item.xNext)}</td>
-              <td>{formatNumber(item.error)}</td>
-              <td>{formatNumber(item.convergenceRate)}</td>
-            </tr>
-          );
-        default:
-          return null;
-      }
+      return (
+        <tr
+          key={index}
+          className={`border-t border-slate-200/50 transition-all ${
+            isActive
+              ? 'bg-gradient-to-r from-pink-100/50 to-purple-100/50 font-bold border-l-4 border-l-pink-500'
+              : 'hover:bg-white/50'
+          }`}
+        >
+          {cells}
+        </tr>
+      );
     });
   };
 
   return (
-    <div className="data-table-container">
-      <div className="chart-title">迭代数据表</div>
-      <div className="table-wrapper">
-        <table className="data-table">
-          <thead>
-            {renderTableHeaders()}
+    <div className="glass rounded-3xl p-6 shadow-xl border border-white/40">
+      <h2 className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-4">迭代数据表</h2>
+      <div className="overflow-x-auto overflow-y-auto max-h-[400px] rounded-2xl bg-white/30">
+        <table className="w-full">
+          <thead className="bg-gradient-to-r from-slate-100/80 to-slate-200/80 sticky top-0">
+            <tr>{renderHeaders()}</tr>
           </thead>
-          <tbody>
-            {renderTableRows()}
+          <tbody className="text-slate-700">
+            {renderRows()}
           </tbody>
         </table>
       </div>
@@ -159,4 +170,3 @@ function DataTable({ history, currentStep, method }) {
 }
 
 export default DataTable;
-

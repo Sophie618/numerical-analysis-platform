@@ -1,151 +1,106 @@
 import { useState, useEffect } from 'react';
-import './AnimationController.css';
 
-/**
- * 动画控制器组件
- * 提供播放/暂停/单步前进/后退/速度控制功能
- */
-function AnimationController({ 
-  currentStep, 
-  totalSteps, 
-  onStepChange, 
-  isPlaying, 
-  onPlayPause,
-  speed,
-  onSpeedChange 
-}) {
+function AnimationController({ currentStep, totalSteps, onStepChange, isPlaying, onPlayPause, speed, onSpeedChange }) {
   const [localSpeed, setLocalSpeed] = useState(speed || 1.0);
 
   useEffect(() => {
     setLocalSpeed(speed || 1.0);
   }, [speed]);
 
-  // 跳转到第一步
-  const handleFirst = () => {
-    onStepChange(0);
-  };
-
-  // 上一步
-  const handlePrevious = () => {
-    if (currentStep > 0) {
-      onStepChange(currentStep - 1);
-    }
-  };
-
-  // 下一步
-  const handleNext = () => {
-    if (currentStep < totalSteps - 1) {
-      onStepChange(currentStep + 1);
-    }
-  };
-
-  // 跳转到最后一步
-  const handleLast = () => {
-    onStepChange(totalSteps - 1);
-  };
-
-  // 播放/暂停
-  const handlePlayPause = () => {
-    onPlayPause();
-  };
-
-  // 速度调整
   const handleSpeedChange = (e) => {
     const newSpeed = parseFloat(e.target.value);
     setLocalSpeed(newSpeed);
     onSpeedChange(newSpeed);
   };
 
-  // 进度条点击跳转
-  const handleProgressClick = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const percentage = x / rect.width;
-    const newStep = Math.floor(percentage * totalSteps);
-    onStepChange(Math.max(0, Math.min(newStep, totalSteps - 1)));
-  };
-
   const progress = totalSteps > 0 ? (currentStep / (totalSteps - 1)) * 100 : 0;
 
   return (
-    <div className="animation-controller">
-      <div className="panel-section">
-        <div className="section-title">动画控制</div>
-        
-        <div className="animation-controls">
-          <div className="step-indicator">
-            <span className="step-current">{currentStep + 1}</span>
-            <span className="step-separator">/</span>
-            <span className="step-total">{totalSteps}</span>
-          </div>
+    <div className="glass rounded-3xl p-6 shadow-xl border border-white/40">
+      <h2 className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-4">动画控制</h2>
+      
+      <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-5 space-y-4">
+        {/* Step Indicator */}
+        <div className="text-center">
+          <span className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+            {currentStep + 1}
+          </span>
+          <span className="text-slate-400 mx-2">/</span>
+          <span className="text-xl font-semibold text-slate-600">{totalSteps}</span>
+        </div>
 
-          <div className="control-buttons">
-            <button 
-              className="control-btn" 
-              onClick={handleFirst}
-              disabled={currentStep === 0 || totalSteps === 0}
-              title="第一步"
-            >
-              ⏮
-            </button>
-            <button 
-              className="control-btn" 
-              onClick={handlePrevious}
-              disabled={currentStep === 0 || totalSteps === 0}
-              title="上一步"
-            >
-              ⏪
-            </button>
-            <button 
-              className="control-btn play-btn" 
-              onClick={handlePlayPause}
-              disabled={totalSteps === 0}
-              title={isPlaying ? "暂停" : "播放"}
-            >
-              {isPlaying ? '⏸' : '▶'}
-            </button>
-            <button 
-              className="control-btn" 
-              onClick={handleNext}
-              disabled={currentStep >= totalSteps - 1 || totalSteps === 0}
-              title="下一步"
-            >
-              ⏩
-            </button>
-            <button 
-              className="control-btn" 
-              onClick={handleLast}
-              disabled={currentStep >= totalSteps - 1 || totalSteps === 0}
-              title="最后一步"
-            >
-              ⏭
-            </button>
-          </div>
-
-          <div 
-            className="progress-bar" 
-            onClick={handleProgressClick}
-            style={{ cursor: totalSteps > 0 ? 'pointer' : 'default' }}
+        {/* Control Buttons */}
+        <div className="flex justify-center items-center gap-2">
+          <button 
+            onClick={() => onStepChange(0)}
+            disabled={currentStep === 0 || totalSteps === 0}
+            className="p-3 rounded-xl bg-white/80 text-slate-700 hover:bg-white hover:scale-110 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200 shadow-sm"
           >
-            <div 
-              className="progress-fill" 
-              style={{ width: `${progress}%` }}
-            />
-          </div>
+            ⏮
+          </button>
+          <button 
+            onClick={() => onStepChange(Math.max(0, currentStep - 1))}
+            disabled={currentStep === 0 || totalSteps === 0}
+            className="p-3 rounded-xl bg-white/80 text-slate-700 hover:bg-white hover:scale-110 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200 shadow-sm"
+          >
+            ⏪
+          </button>
+          <button 
+            onClick={onPlayPause}
+            disabled={totalSteps === 0}
+            className="p-4 rounded-2xl bg-gradient-to-r from-blue-500 to-indigo-600 text-white hover:scale-110 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200 shadow-lg shadow-blue-500/50"
+          >
+            {isPlaying ? '⏸' : '▶'}
+          </button>
+          <button 
+            onClick={() => onStepChange(Math.min(totalSteps - 1, currentStep + 1))}
+            disabled={currentStep >= totalSteps - 1 || totalSteps === 0}
+            className="p-3 rounded-xl bg-white/80 text-slate-700 hover:bg-white hover:scale-110 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200 shadow-sm"
+          >
+            ⏩
+          </button>
+          <button 
+            onClick={() => onStepChange(totalSteps - 1)}
+            disabled={currentStep >= totalSteps - 1 || totalSteps === 0}
+            className="p-3 rounded-xl bg-white/80 text-slate-700 hover:bg-white hover:scale-110 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200 shadow-sm"
+          >
+            ⏭
+          </button>
+        </div>
 
-          <div className="speed-control">
-            <span className="speed-label">速度</span>
-            <input
-              type="range"
-              min="0.1"
-              max="3"
-              step="0.1"
-              value={localSpeed}
-              onChange={handleSpeedChange}
-              disabled={totalSteps === 0}
-            />
-            <span className="speed-value">{localSpeed.toFixed(1)}x</span>
-          </div>
+        {/* Progress Bar */}
+        <div 
+          onClick={(e) => {
+            if (totalSteps > 0) {
+              const rect = e.currentTarget.getBoundingClientRect();
+              const x = e.clientX - rect.left;
+              const percentage = x / rect.width;
+              const newStep = Math.floor(percentage * totalSteps);
+              onStepChange(Math.max(0, Math.min(newStep, totalSteps - 1)));
+            }
+          }}
+          className="h-2 bg-white/60 rounded-full overflow-hidden cursor-pointer hover:h-3 transition-all"
+        >
+          <div 
+            className="h-full bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full transition-all duration-300 shadow-lg"
+            style={{ width: `${progress}%` }}
+          />
+        </div>
+
+        {/* Speed Control */}
+        <div className="flex items-center gap-3">
+          <span className="text-xs font-medium text-slate-600 w-10">速度</span>
+          <input
+            type="range"
+            min="0.1"
+            max="3"
+            step="0.1"
+            value={localSpeed}
+            onChange={handleSpeedChange}
+            disabled={totalSteps === 0}
+            className="flex-1 h-2 bg-white/60 rounded-full appearance-none cursor-pointer disabled:opacity-40 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-gradient-to-r [&::-webkit-slider-thumb]:from-blue-500 [&::-webkit-slider-thumb]:to-indigo-600 [&::-webkit-slider-thumb]:shadow-lg [&::-webkit-slider-thumb]:cursor-pointer hover:[&::-webkit-slider-thumb]:scale-125 [&::-webkit-slider-thumb]:transition-transform"
+          />
+          <span className="text-sm font-bold text-blue-600 w-12 text-right">{localSpeed.toFixed(1)}x</span>
         </div>
       </div>
     </div>
@@ -153,4 +108,3 @@ function AnimationController({
 }
 
 export default AnimationController;
-
