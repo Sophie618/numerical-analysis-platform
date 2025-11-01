@@ -49,7 +49,7 @@ function Home() {
       {/* Hero Section */}
       <section className="max-w-[1800px] mx-auto px-8 py-16">
         <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent mb-4">
+          <h1 className="text-5xl font-bold bg-secondary-600  bg-clip-text text-transparent mb-4">
             探索数值分析迭代求根方法
           </h1>
           <p className="text-xl text-neutral-600 mb-8">

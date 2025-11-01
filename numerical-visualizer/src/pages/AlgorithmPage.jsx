@@ -5,21 +5,11 @@ import FunctionPlot from '../components/FunctionPlot';
 import ConvergenceChart from '../components/ConvergenceChart';
 import DataTable from '../components/DataTable';
 import ExportButton from '../components/ExportButton';
-import { bisection, newton, aitken, secant, createIterationFunction, PRESET_FUNCTIONS, ALGORITHMS } from '../algorithms';
+import { bisection, newton, aitken, secant, createIterationFunction, ALGORITHMS } from '../algorithms';
+import { useSettings } from '../context/SettingsContext';
 
 function AlgorithmPage({ algorithmKey }) {
-  const [currentFunction, setCurrentFunction] = useState({
-    f: PRESET_FUNCTIONS[0].f,
-    df: PRESET_FUNCTIONS[0].df,
-    expression: PRESET_FUNCTIONS[0].expression,
-    name: PRESET_FUNCTIONS[0].name
-  });
-  const [parameters, setParameters] = useState({
-    x0: 1.0,
-    x1: 2.0,
-    tolerance: 0.0001,
-    maxIterations: 50
-  });
+  const { currentFunction, setCurrentFunction, parameters, setParameters } = useSettings();
   const [result, setResult] = useState(null);
   const [history, setHistory] = useState([]);
   const [currentStep, setCurrentStep] = useState(0);
@@ -28,7 +18,32 @@ function AlgorithmPage({ algorithmKey }) {
 
   const runAlgorithm = useCallback(() => {
     if (!currentFunction.f) return;
+    
+    // 参数验证
     try {
+      if (parameters.tolerance <= 0) {
+        alert('容许误差必须大于 0');
+        return;
+      }
+      if (parameters.maxIterations <= 0) {
+        alert('最大迭代次数必须大于 0');
+        return;
+      }
+      
+      // 二分法和弦截法需要检查区间
+      if (algorithmKey === 'bisection' || algorithmKey === 'secant') {
+        if (parameters.x0 === parameters.x1) {
+          alert('二分法和弦截法需要两个不同的初值');
+          return;
+        }
+      }
+      
+      // 牛顿法需要检查导数
+      if (algorithmKey === 'newton' && !currentFunction.df) {
+        alert('牛顿法需要函数的导数，请选择预设函数或重新输入自定义函数');
+        return;
+      }
+
       let algorithmResult;
       switch (algorithmKey) {
         case 'bisection':
@@ -81,7 +96,7 @@ function AlgorithmPage({ algorithmKey }) {
   return (
     <div className="min-h-screen bg-gradient-to-br from-neutral-50 to-neutral-100">
       <div className="flex">
-        <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-[320px_1fr] w-full">
           {/* Left Sidebar - Unified Container */}
           <aside className="bg-white min-h-screen shadow-lg border-r border-neutral-200 overflow-y-auto">
             <div>
@@ -149,38 +164,38 @@ function AlgorithmPage({ algorithmKey }) {
           </aside>
 
           {/* Right Panel - Visualizations */}
-          <main className="p-6 space-y-6">
-            {/* Page Header */}
-            <div className="bg-white rounded-2xl p-6 shadow-md border border-neutral-200">
-              <div className="flex items-center gap-12">
-                <div className="flex-1">
-                  <h2 className="text-3xl font-bold text-secondary-500 mb-2">
-                    {algorithm.displayName}
-                  </h2>
-                  <p className="text-neutral-600">{algorithm.description}</p>
-                </div>
-                <div className="flex items-center">
-                  <div className="text-center">
-                    <div className="text-sm text-neutral-500">收敛阶</div>
+          <main className="p-6">
+            <div className="max-w-[1400px] mx-auto space-y-6">
+              {/* Page Header */}
+              <div className="p-6">
+                <div className="flex items-center gap-12">
+                  <div>
+                    <h2 className="text-4xl font-bold text-secondary-500 mb-2">
+                      {algorithm.displayName}
+                    </h2>
+                    <p className="text-lg text-neutral-600">{algorithm.description}</p>
+                  </div>
+                  <div className="text-center flex-shrink-0">
+                    <div className="text-lg text-neutral-500">收敛阶</div>
                     <div className="text-2xl font-bold text-primary-600">{algorithm.convergenceOrder}</div>
                   </div>
                 </div>
               </div>
-            </div>
 
-            <FunctionPlot
-              func={currentFunction.f}
-              history={history}
-              currentStep={currentStep}
-              method={algorithm.name}
-              xRange={[parameters.x0 - 2, parameters.x1 + 2]}
-            />
-            <ConvergenceChart history={history} currentStep={currentStep} />
-            <DataTable
-              history={history}
-              currentStep={currentStep}
-              method={algorithm.name}
-            />
+              <FunctionPlot
+                func={currentFunction.f}
+                history={history}
+                currentStep={currentStep}
+                method={algorithm.name}
+                xRange={[parameters.x0 - 2, parameters.x1 + 2]}
+              />
+              <ConvergenceChart history={history} currentStep={currentStep} />
+              <DataTable
+                history={history}
+                currentStep={currentStep}
+                method={algorithm.name}
+              />
+            </div>
           </main>
         </div>
       </div>

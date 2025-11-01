@@ -5,21 +5,24 @@ import BisectionPage from './pages/BisectionPage';
 import NewtonPage from './pages/NewtonPage';
 import AitkenPage from './pages/AitkenPage';
 import SecantPage from './pages/SecantPage';
+import { SettingsProvider } from './context/SettingsContext';
 
 function App() {
   return (
-    <Router>
-      <div className="min-h-screen bg-neutral-50">
-        <Header />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/bisection" element={<BisectionPage />} />
-          <Route path="/newton" element={<NewtonPage />} />
-          <Route path="/aitken" element={<AitkenPage />} />
-          <Route path="/secant" element={<SecantPage />} />
-        </Routes>
-      </div>
-    </Router>
+    <SettingsProvider>
+      <Router>
+        <div className="min-h-screen bg-neutral-50">
+          <Header />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/bisection" element={<BisectionPage />} />
+            <Route path="/newton" element={<NewtonPage />} />
+            <Route path="/aitken" element={<AitkenPage />} />
+            <Route path="/secant" element={<SecantPage />} />
+          </Routes>
+        </div>
+      </Router>
+    </SettingsProvider>
   );
 }
 

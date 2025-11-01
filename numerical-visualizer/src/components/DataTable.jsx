@@ -81,8 +81,6 @@ function DataTable({ history, currentStep, method }) {
 
   const renderRows = () => {
     return history.map((item, index) => {
-      const isActive = index === currentStep;
-      
       const cells = (() => {
         switch (method) {
           case 'Bisection':
