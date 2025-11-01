@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "name": "numerical-analysis-platform",
+  "builds": [
+    {
+      "src": "numerical-visualizer/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/numerical-visualizer/$1"
+    }
+  ],
+  "buildCommand": "cd numerical-visualizer && npm install && npm run build",
+  "outputDirectory": "numerical-visualizer/dist"
+}
+
