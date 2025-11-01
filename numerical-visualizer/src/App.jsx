@@ -188,15 +188,13 @@ function App() {
             xRange={[parameters.x0 - 2, parameters.x1 + 2]}
           />
           <ConvergenceChart history={history} currentStep={currentStep} />
+          <DataTable
+            history={history}
+            currentStep={currentStep}
+            method={ALGORITHMS[selectedAlgorithm].name}
+          />
         </main>
       </div>
-
-      {/* Data Table */}
-      <DataTable
-        history={history}
-        currentStep={currentStep}
-        method={ALGORITHMS[selectedAlgorithm].name}
-      />
     </div>
   );
 }
