@@ -4,7 +4,6 @@ import AnimationController from './components/AnimationController';
 import FunctionPlot from './components/FunctionPlot';
 import ConvergenceChart from './components/ConvergenceChart';
 import DataTable from './components/DataTable';
-import BasinPlot from './components/BasinPlot';
 import ExportButton from './components/ExportButton';
 import { bisection, newton, aitken, secant, createIterationFunction, PRESET_FUNCTIONS, ALGORITHMS } from './algorithms';
 
@@ -192,20 +191,12 @@ function App() {
         </main>
       </div>
 
-      {/* Bottom Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <DataTable
-          history={history}
-          currentStep={currentStep}
-          method={ALGORITHMS[selectedAlgorithm].name}
-        />
-        <BasinPlot
-          algorithm={selectedAlgorithm}
-          func={currentFunction.f}
-          df={currentFunction.df}
-          parameters={parameters}
-        />
-      </div>
+      {/* Data Table */}
+      <DataTable
+        history={history}
+        currentStep={currentStep}
+        method={ALGORITHMS[selectedAlgorithm].name}
+      />
     </div>
   );
 }
