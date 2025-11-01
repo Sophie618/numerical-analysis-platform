@@ -1,20 +1,32 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { create, all } from 'mathjs';
 import { PRESET_FUNCTIONS } from '../algorithms';
+import { useSettings } from '../context/SettingsContext';
 
 const math = create(all);
 
-function FunctionInput({ onFunctionChange, onParametersChange }) {
+function FunctionInput() {
+  const { currentFunction, setCurrentFunction, parameters, setParameters } = useSettings();
   const [selectedPreset, setSelectedPreset] = useState('quadratic');
   const [customExpression, setCustomExpression] = useState('');
   const [useCustom, setUseCustom] = useState(false);
-  const [parameters, setParameters] = useState({
-    x0: 1.0,
-    x1: 2.0,
-    tolerance: 0.0001,
-    maxIterations: 50
-  });
   const [parseError, setParseError] = useState('');
+
+  // 初始化时根据当前函数设置选中的预设
+  useEffect(() => {
+    if (currentFunction.name) {
+      const preset = PRESET_FUNCTIONS.find(p => p.name === currentFunction.name);
+      if (preset) {
+        setSelectedPreset(preset.id);
+        setUseCustom(false);
+      } else {
+        setSelectedPreset('custom');
+        setUseCustom(true);
+        setCustomExpression(currentFunction.expression || '');
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handlePresetChange = (e) => {
     const presetId = e.target.value;
@@ -31,7 +43,7 @@ function FunctionInput({ onFunctionChange, onParametersChange }) {
           x0: preset.suggestedInterval[0],
           x1: preset.suggestedInterval[1]
         }));
-        onFunctionChange({
+        setCurrentFunction({
           f: preset.f,
           df: preset.df,
           expression: preset.expression,
@@ -67,16 +79,14 @@ function FunctionInput({ onFunctionChange, onParametersChange }) {
         throw new Error('函数计算结果无效');
       }
       setParseError('');
-      onFunctionChange({ f, df, expression: expr, name: '自定义函数' });
+      setCurrentFunction({ f, df, expression: expr, name: '自定义函数' });
     } catch (err) {
       setParseError('表达式解析错误: ' + err.message);
     }
   };
 
   const handleParameterChange = (key, value) => {
-    const newParameters = { ...parameters, [key]: parseFloat(value) };
-    setParameters(newParameters);
-    onParametersChange(newParameters);
+    setParameters({ ...parameters, [key]: parseFloat(value) });
   };
 
   return (

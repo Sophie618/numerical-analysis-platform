@@ -9,7 +9,7 @@ import { bisection, newton, aitken, secant, createIterationFunction, ALGORITHMS 
 import { useSettings } from '../context/SettingsContext';
 
 function AlgorithmPage({ algorithmKey }) {
-  const { currentFunction, setCurrentFunction, parameters, setParameters } = useSettings();
+  const { currentFunction, parameters } = useSettings();
   const [result, setResult] = useState(null);
   const [history, setHistory] = useState([]);
   const [currentStep, setCurrentStep] = useState(0);
@@ -102,10 +102,7 @@ function AlgorithmPage({ algorithmKey }) {
             <div>
               {/* Function Input Section */}
               <div className="p-6 border-b border-neutral-200">
-                <FunctionInput
-                  onFunctionChange={setCurrentFunction}
-                  onParametersChange={setParameters}
-                />
+                <FunctionInput />
               </div>
 
               {/* Animation Controller Section */}
