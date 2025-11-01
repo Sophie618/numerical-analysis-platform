@@ -140,9 +140,9 @@ function DataTable({ history, currentStep, method }) {
       return (
         <tr
           key={index}
-          className={`border-t border-slate-200/50 transition-all ${
+          className={`border-t border-neutral-200/50 transition-all ${
             isActive
-              ? 'bg-gradient-to-r from-pink-100/50 to-purple-100/50 font-bold border-l-4 border-l-pink-500'
+              ? 'bg-gradient-to-r from-primary-100/30 to-secondary-100/30 font-bold border-l-4 border-l-primary-500'
               : 'hover:bg-white/50'
           }`}
         >
@@ -153,11 +153,11 @@ function DataTable({ history, currentStep, method }) {
   };
 
   return (
-    <div className="glass rounded-3xl p-6 shadow-xl border border-white/40">
-      <h2 className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-4">迭代数据表</h2>
-      <div className="overflow-x-auto overflow-y-auto max-h-[400px] rounded-2xl bg-white/30">
+    <div className="bg-white rounded-2xl p-6 shadow-md border border-neutral-200">
+      <h2 className="text-sm font-semibold text-neutral-500 uppercase tracking-wider mb-4">迭代数据表</h2>
+      <div className="overflow-x-auto overflow-y-auto max-h-[400px] rounded-2xl bg-neutral-50/50 border border-neutral-200">
         <table className="w-full">
-          <thead className="bg-gradient-to-r from-slate-100/80 to-slate-200/80 sticky top-0">
+          <thead className="bg-gradient-to-r from-neutral-100 to-neutral-200 sticky top-0">
             <tr>{renderHeaders()}</tr>
           </thead>
           <tbody className="text-slate-700">

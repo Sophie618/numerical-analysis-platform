@@ -52,7 +52,9 @@ function FunctionPlot({ func, history, currentStep, method, xRange }) {
         if (isFinite(y) && Math.abs(y) < 1000) {
           curveData.push({ x, y });
         }
-      } catch (err) {}
+      } catch {
+        // Ignore errors for invalid function evaluations
+      }
     }
 
     const yValues = curveData.map(d => d.y);
@@ -230,15 +232,15 @@ function FunctionPlot({ func, history, currentStep, method, xRange }) {
   }, [func, history, currentStep, method, xRange]);
 
   return (
-    <div className="glass rounded-3xl p-6 shadow-xl border border-white/40">
+    <div className="bg-white rounded-2xl p-6 shadow-md border border-neutral-200">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-sm font-semibold text-slate-500 uppercase tracking-wider">函数曲线与迭代过程</h2>
+        <h2 className="text-sm font-semibold text-neutral-500 uppercase tracking-wider">函数曲线与迭代过程</h2>
         <div className="flex items-center gap-2">
-          <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse-glow"></div>
-          <span className="text-xs text-slate-600">实时渲染</span>
+          <div className="w-2 h-2 bg-secondary-500 rounded-full animate-pulse-glow"></div>
+          <span className="text-xs text-neutral-600">实时渲染</span>
         </div>
       </div>
-      <div ref={containerRef} className="w-full h-[400px] bg-gradient-to-br from-white/50 to-blue-50/30 rounded-2xl">
+      <div ref={containerRef} className="w-full h-[400px] bg-gradient-to-br from-neutral-50 to-neutral-100 rounded-2xl border border-neutral-200">
         <svg ref={svgRef}></svg>
       </div>
     </div>

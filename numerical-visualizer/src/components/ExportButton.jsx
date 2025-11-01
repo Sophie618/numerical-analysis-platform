@@ -85,7 +85,7 @@ function ExportButton({ history, result, method, functionName }) {
       <button 
         onClick={exportToCSV}
         disabled={!history || history.length === 0}
-        className="flex-1 px-4 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl font-semibold text-sm hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-2"
+        className="flex-1 px-4 py-3 bg-gradient-to-r from-secondary-500 to-secondary-600 text-white rounded-xl font-semibold text-sm hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-2"
       >
         <span>📊</span>
         <span>CSV</span>
@@ -93,7 +93,7 @@ function ExportButton({ history, result, method, functionName }) {
       <button 
         onClick={exportToJSON}
         disabled={!history || history.length === 0}
-        className="flex-1 px-4 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-xl font-semibold text-sm hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-2"
+        className="flex-1 px-4 py-3 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-xl font-semibold text-sm hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-2"
       >
         <span>📄</span>
         <span>JSON</span>

@@ -121,9 +121,9 @@ function ConvergenceChart({ history, currentStep }) {
   }, [history, currentStep]);
 
   return (
-    <div className="glass rounded-3xl p-6 shadow-xl border border-white/40">
-      <h2 className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-4">收敛速度分析</h2>
-      <div ref={containerRef} className="w-full h-[300px] bg-gradient-to-br from-white/50 to-orange-50/30 rounded-2xl">
+    <div className="bg-white rounded-2xl p-6 shadow-md border border-neutral-200">
+      <h2 className="text-sm font-semibold text-neutral-500 uppercase tracking-wider mb-4">收敛速度分析</h2>
+      <div ref={containerRef} className="w-full h-[300px] bg-gradient-to-br from-neutral-50 to-neutral-100 rounded-2xl border border-neutral-200">
         <svg ref={svgRef}></svg>
       </div>
     </div>

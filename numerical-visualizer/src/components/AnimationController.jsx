@@ -16,17 +16,17 @@ function AnimationController({ currentStep, totalSteps, onStepChange, isPlaying,
   const progress = totalSteps > 0 ? (currentStep / (totalSteps - 1)) * 100 : 0;
 
   return (
-    <div className="glass rounded-3xl p-6 shadow-xl border border-white/40">
-      <h2 className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-4">动画控制</h2>
+    <div className="bg-white rounded-2xl p-6 shadow-md border border-neutral-200">
+      <h2 className="text-sm font-semibold text-neutral-500 uppercase tracking-wider mb-4">动画控制</h2>
       
-      <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-5 space-y-4">
+      <div className="bg-gradient-to-br from-neutral-50 to-neutral-100 rounded-2xl p-5 space-y-4 border border-neutral-200">
         {/* Step Indicator */}
         <div className="text-center">
-          <span className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+          <span className="text-3xl font-bold bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">
             {currentStep + 1}
           </span>
-          <span className="text-slate-400 mx-2">/</span>
-          <span className="text-xl font-semibold text-slate-600">{totalSteps}</span>
+          <span className="text-neutral-400 mx-2">/</span>
+          <span className="text-xl font-semibold text-neutral-600">{totalSteps}</span>
         </div>
 
         {/* Control Buttons */}
@@ -48,7 +48,7 @@ function AnimationController({ currentStep, totalSteps, onStepChange, isPlaying,
           <button 
             onClick={onPlayPause}
             disabled={totalSteps === 0}
-            className="p-4 rounded-2xl bg-gradient-to-r from-blue-500 to-indigo-600 text-white hover:scale-110 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200 shadow-lg shadow-blue-500/50"
+            className="p-4 rounded-2xl bg-gradient-to-r from-primary-500 to-secondary-500 text-white hover:scale-110 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200 shadow-lg"
           >
             {isPlaying ? '⏸' : '▶'}
           </button>
@@ -82,7 +82,7 @@ function AnimationController({ currentStep, totalSteps, onStepChange, isPlaying,
           className="h-2 bg-white/60 rounded-full overflow-hidden cursor-pointer hover:h-3 transition-all"
         >
           <div 
-            className="h-full bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full transition-all duration-300 shadow-lg"
+            className="h-full bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full transition-all duration-300 shadow-lg"
             style={{ width: `${progress}%` }}
           />
         </div>
@@ -100,7 +100,7 @@ function AnimationController({ currentStep, totalSteps, onStepChange, isPlaying,
             disabled={totalSteps === 0}
             className="flex-1 h-2 bg-white/60 rounded-full appearance-none cursor-pointer disabled:opacity-40 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-gradient-to-r [&::-webkit-slider-thumb]:from-blue-500 [&::-webkit-slider-thumb]:to-indigo-600 [&::-webkit-slider-thumb]:shadow-lg [&::-webkit-slider-thumb]:cursor-pointer hover:[&::-webkit-slider-thumb]:scale-125 [&::-webkit-slider-thumb]:transition-transform"
           />
-          <span className="text-sm font-bold text-blue-600 w-12 text-right">{localSpeed.toFixed(1)}x</span>
+          <span className="text-sm font-bold text-primary-600 w-12 text-right">{localSpeed.toFixed(1)}x</span>
         </div>
       </div>
     </div>

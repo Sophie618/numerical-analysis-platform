@@ -8,28 +8,40 @@ export default {
     extend: {
       colors: {
         primary: {
-          50: '#f0f9ff',
-          100: '#e0f2fe',
-          200: '#bae6fd',
-          300: '#7dd3fc',
-          400: '#38bdf8',
-          500: '#0ea5e9',
-          600: '#0284c7',
-          700: '#0369a1',
-          800: '#075985',
-          900: '#0c4a6e',
+          50: '#FFF5F0',
+          100: '#FFE8DC',
+          200: '#FFD1B9',
+          300: '#FFBA96',
+          400: '#FFA373',
+          500: '#A13F0B',  // 主橙色
+          600: '#8A3609',
+          700: '#732D08',
+          800: '#5C2406',
+          900: '#451B04',
         },
-        accent: {
-          50: '#fdf4ff',
-          100: '#fae8ff',
-          200: '#f5d0fe',
-          300: '#f0abfc',
-          400: '#e879f9',
-          500: '#d946ef',
-          600: '#c026d3',
-          700: '#a21caf',
-          800: '#86198f',
-          900: '#701a75',
+        secondary: {
+          50: '#E6F5EF',
+          100: '#CCEBDF',
+          200: '#99D7BF',
+          300: '#66C39F',
+          400: '#33AF7F',
+          500: '#006C39',  // 主绿色
+          600: '#005C30',
+          700: '#004D27',
+          800: '#003D1E',
+          900: '#002E15',
+        },
+        neutral: {
+          50: '#FAFAFA',
+          100: '#F5F5F5',
+          200: '#E5E5E5',
+          300: '#D4D4D4',
+          400: '#A3A3A3',
+          500: '#737373',
+          600: '#525252',
+          700: '#404040',
+          800: '#262626',
+          900: '#171717',
         }
       },
       animation: {
@@ -57,12 +69,7 @@ export default {
           '50%': { opacity: 0.5, transform: 'scale(1.05)' },
         },
       },
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-      },
     },
   },
   plugins: [],
 }
-

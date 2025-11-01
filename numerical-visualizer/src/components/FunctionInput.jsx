@@ -54,7 +54,7 @@ function FunctionInput({ onFunctionChange, onParametersChange }) {
       const f = (x) => {
         try {
           return compiled.evaluate({ x: x });
-        } catch (err) {
+        } catch {
           return NaN;
         }
       };
@@ -80,7 +80,7 @@ function FunctionInput({ onFunctionChange, onParametersChange }) {
   };
 
   return (
-    <div className="glass rounded-3xl p-6 shadow-xl border border-white/40 space-y-6">
+    <div className="bg-white rounded-2xl p-6 shadow-md border border-neutral-200 space-y-6">
       <div>
         <h2 className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-4">函数设置</h2>
         <div className="space-y-3">
@@ -89,7 +89,7 @@ function FunctionInput({ onFunctionChange, onParametersChange }) {
             <select 
               value={selectedPreset}
               onChange={handlePresetChange}
-              className="w-full px-4 py-3 bg-white/60 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+              className="w-full px-4 py-3 bg-neutral-50 border border-neutral-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
             >
               {PRESET_FUNCTIONS.map(preset => (
                 <option key={preset.id} value={preset.id}>{preset.name}</option>
@@ -106,8 +106,8 @@ function FunctionInput({ onFunctionChange, onParametersChange }) {
                 value={customExpression}
                 onChange={handleCustomExpressionChange}
                 placeholder="例如: x^2 - 2"
-                className={`w-full px-4 py-3 bg-white/60 border rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${
-                  parseError ? 'border-red-300 focus:ring-red-500' : 'border-slate-200'
+                className={`w-full px-4 py-3 bg-neutral-50 border rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all ${
+                  parseError ? 'border-red-300 focus:ring-red-500' : 'border-neutral-300'
                 }`}
               />
               {parseError && (
@@ -131,7 +131,7 @@ function FunctionInput({ onFunctionChange, onParametersChange }) {
               value={parameters.x0}
               step="0.1"
               onChange={(e) => handleParameterChange('x0', e.target.value)}
-              className="w-full px-4 py-3 bg-white/60 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+              className="w-full px-4 py-3 bg-neutral-50 border border-neutral-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
             />
           </div>
           <div>
@@ -141,7 +141,7 @@ function FunctionInput({ onFunctionChange, onParametersChange }) {
               value={parameters.x1}
               step="0.1"
               onChange={(e) => handleParameterChange('x1', e.target.value)}
-              className="w-full px-4 py-3 bg-white/60 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+              className="w-full px-4 py-3 bg-neutral-50 border border-neutral-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
             />
           </div>
           <div>
@@ -151,7 +151,7 @@ function FunctionInput({ onFunctionChange, onParametersChange }) {
               value={parameters.tolerance}
               step="0.0001"
               onChange={(e) => handleParameterChange('tolerance', e.target.value)}
-              className="w-full px-4 py-3 bg-white/60 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+              className="w-full px-4 py-3 bg-neutral-50 border border-neutral-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
             />
           </div>
           <div>
@@ -162,7 +162,7 @@ function FunctionInput({ onFunctionChange, onParametersChange }) {
               min="1"
               max="200"
               onChange={(e) => handleParameterChange('maxIterations', e.target.value)}
-              className="w-full px-4 py-3 bg-white/60 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+              className="w-full px-4 py-3 bg-neutral-50 border border-neutral-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
             />
           </div>
         </div>
