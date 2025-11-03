@@ -14,7 +14,8 @@ function Sidebar({
   result,
   algorithmName
 }) {
-  const { currentFunction } = useSettings();
+  const { currentFunction, useNewtonDamping, setUseNewtonDamping } = useSettings();
+  const isNewtonMethod = algorithmName === 'Newton';
 
   return (
     <aside className="bg-white min-h-screen shadow-lg border-r border-neutral-200 overflow-y-auto">
@@ -23,6 +24,33 @@ function Sidebar({
         <div className="p-6 border-b border-neutral-200">
           <FunctionInput />
         </div>
+
+        {/* Newton Damping Toggle */}
+        {isNewtonMethod && (
+          <div className="p-6 border-b border-neutral-200">
+            <h3 className="text-sm font-semibold text-neutral-500 uppercase tracking-wider mb-3">算法选项</h3>
+            <label className="flex items-center gap-3 cursor-pointer group">
+              <div className="relative">
+                <input
+                  type="checkbox"
+                  checked={useNewtonDamping}
+                  onChange={(e) => setUseNewtonDamping(e.target.checked)}
+                  className="sr-only peer"
+                />
+                <div className="w-11 h-6 bg-neutral-200 rounded-full peer peer-checked:bg-secondary-500 transition-colors"></div>
+                <div className="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform peer-checked:translate-x-5"></div>
+              </div>
+              <div>
+                <div className="text-sm font-medium text-neutral-700 group-hover:text-secondary-600 transition-colors">
+                  启用下山条件
+                </div>
+                <div className="text-xs text-neutral-500 mt-0.5">
+                  保证 |f(x_{'{n+1}'})| {'<'} |f(x_n)|
+                </div>
+              </div>
+            </label>
+          </div>
+        )}
 
         {/* Animation Controller Section */}
         <div className="p-6 border-b border-neutral-200">

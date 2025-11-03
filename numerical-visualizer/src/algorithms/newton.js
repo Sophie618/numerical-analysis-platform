@@ -7,9 +7,10 @@
  * @param {number} x0 - 初始值
  * @param {number} tolerance - 容许误差
  * @param {number} maxIterations - 最大迭代次数
+ * @param {boolean} useDamping - 是否使用下山条件
  * @returns {Object} 包含迭代历史的结果对象
  */
-export function newton(f, df, x0, tolerance = 1e-6, maxIterations = 100) {
+export function newton(f, df, x0, tolerance = 1e-6, maxIterations = 100, useDamping = false) {
   const history = [];
   let x = x0;
   let iteration = 0;
@@ -23,7 +24,51 @@ export function newton(f, df, x0, tolerance = 1e-6, maxIterations = 100) {
       throw new Error('导数接近零，无法继续迭代');
     }
     
-    const xNew = x - fx / dfx;
+    let xNew, lambda = 1.0;
+    const dampingAttempts = [];
+    
+    if (useDamping) {
+      // 牛顿下山法：使用下山因子 λ
+      let satisfied = false;
+      let dampingIter = 0;
+      const maxDampingIter = 20; // 最多尝试20次下山
+      
+      while (!satisfied && dampingIter < maxDampingIter) {
+        lambda = 1.0 / Math.pow(2, dampingIter);
+        xNew = x - lambda * fx / dfx;
+        const fxNew = f(xNew);
+        
+        // 记录尝试点
+        dampingAttempts.push({
+          lambda: lambda,
+          x: xNew,
+          fx: fxNew,
+          satisfied: Math.abs(fxNew) < Math.abs(fx)
+        });
+        
+        // 下山条件：|f(x_{n+1})| < |f(x_n)|
+        if (Math.abs(fxNew) < Math.abs(fx)) {
+          satisfied = true;
+        } else {
+          dampingIter++;
+        }
+      }
+      
+      if (!satisfied) {
+        // 如果所有下山尝试都失败，使用最后一个
+        console.warn(`下山条件在第 ${iteration + 1} 次迭代中未满足`);
+      }
+    } else {
+      // 标准牛顿法
+      xNew = x - fx / dfx;
+      dampingAttempts.push({
+        lambda: 1.0,
+        x: xNew,
+        fx: f(xNew),
+        satisfied: true
+      });
+    }
+    
     const error = Math.abs(xNew - x);
     
     // 计算收敛率
@@ -51,7 +96,10 @@ export function newton(f, df, x0, tolerance = 1e-6, maxIterations = 100) {
       xNext: xNew,
       error: error,
       convergenceRate: convergenceRate,
-      tangentLine: tangentLine
+      tangentLine: tangentLine,
+      lambda: lambda,
+      dampingAttempts: dampingAttempts,
+      usedDamping: useDamping
     });
     
     // 检查收敛
@@ -72,7 +120,8 @@ export function newton(f, df, x0, tolerance = 1e-6, maxIterations = 100) {
     iterations: iteration + 1,
     converged: Math.abs(finalResult.fx) < tolerance || finalResult.error < tolerance,
     history: history,
-    method: 'Newton'
+    method: 'Newton',
+    usedDamping: useDamping
   };
 }
 

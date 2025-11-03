@@ -1,13 +1,14 @@
 import { useState, useEffect, useCallback } from 'react';
 import Sidebar from '../components/Sidebar';
 import FunctionPlot from '../components/FunctionPlot';
+import GeometricVisualization from '../components/GeometricVisualization';
 import ConvergenceChart from '../components/ConvergenceChart';
 import DataTable from '../components/DataTable';
 import { bisection, newton, aitken, secant, createIterationFunction, ALGORITHMS } from '../algorithms';
 import { useSettings } from '../context/SettingsContext';
 
 function AlgorithmPage({ algorithmKey }) {
-  const { currentFunction, parameters } = useSettings();
+  const { currentFunction, parameters, useNewtonDamping } = useSettings();
   const [result, setResult] = useState(null);
   const [history, setHistory] = useState([]);
   const [currentStep, setCurrentStep] = useState(0);
@@ -48,7 +49,7 @@ function AlgorithmPage({ algorithmKey }) {
           algorithmResult = bisection(currentFunction.f, parameters.x0, parameters.x1, parameters.tolerance, parameters.maxIterations);
           break;
         case 'newton':
-          algorithmResult = newton(currentFunction.f, currentFunction.df, parameters.x0, parameters.tolerance, parameters.maxIterations);
+          algorithmResult = newton(currentFunction.f, currentFunction.df, parameters.x0, parameters.tolerance, parameters.maxIterations, useNewtonDamping);
           break;
         case 'aitken': {
           const g = createIterationFunction(currentFunction.f, 0.1);
@@ -69,7 +70,7 @@ function AlgorithmPage({ algorithmKey }) {
       alert('算法执行错误: ' + error.message);
       console.error(error);
     }
-  }, [algorithmKey, currentFunction, parameters]);
+  }, [algorithmKey, currentFunction, parameters, useNewtonDamping]);
 
   useEffect(() => {
     runAlgorithm();
@@ -114,26 +115,41 @@ function AlgorithmPage({ algorithmKey }) {
               {/* Page Header */}
               <div className="p-6">
                 <div className="flex items-center gap-12">
-                  <div>
+                  <div className="flex">
                     <h2 className="text-4xl font-bold text-secondary-500 mb-2">
                       {algorithm.displayName}
                     </h2>
                     <p className="text-lg text-neutral-600">{algorithm.description}</p>
+                    {algorithm.note && (
+                      <p className="text-sm text-neutral-500 mt-2 italic">{algorithm.note}</p>
+                    )}
                   </div>
-                  <div className="text-center flex-shrink-0">
-                    <div className="text-lg text-neutral-500">收敛阶</div>
-                    <div className="text-2xl font-bold text-primary-600">{algorithm.convergenceOrder}</div>
-                  </div>
+                  {algorithmKey !== 'bisection' && (
+                    <div className="text-center flex-shrink-0">
+                      <div className="text-lg text-neutral-500">收敛阶</div>
+                      <div className="text-2xl font-bold text-primary-600">{algorithm.convergenceOrder}</div>
+                    </div>
+                  )}
                 </div>
               </div>
 
-              <FunctionPlot
-                func={currentFunction.f}
-                history={history}
-                currentStep={currentStep}
-                method={algorithm.name}
-                xRange={[parameters.x0 - 2, parameters.x1 + 2]}
-              />
+              {/* Function Plot and Geometric Visualization Side by Side */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <FunctionPlot
+                  func={currentFunction.f}
+                  history={history}
+                  currentStep={currentStep}
+                  method={algorithm.name}
+                  xRange={[parameters.x0 - 2, parameters.x1 + 2]}
+                />
+                <GeometricVisualization
+                  method={algorithm.name}
+                  history={history}
+                  currentStep={currentStep}
+                  func={currentFunction.f}
+                  df={currentFunction.df}
+                />
+              </div>
               <ConvergenceChart history={history} currentStep={currentStep} />
             <DataTable
               history={history}

@@ -39,12 +39,14 @@ function DataTable({ history, method }) {
           </>
         );
       case 'Newton':
+        const hasLambda = history.some(item => item.lambda !== undefined && item.lambda !== 1.0);
         return (
           <>
             <th className="px-4 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">步数</th>
             <th className="px-4 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">x<sub>n</sub></th>
             <th className="px-4 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">f(x<sub>n</sub>)</th>
             <th className="px-4 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">f'(x<sub>n</sub>)</th>
+            {hasLambda && <th className="px-4 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">λ</th>}
             <th className="px-4 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">x<sub>n+1</sub></th>
             <th className="px-4 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">误差</th>
             <th className="px-4 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">收敛率</th>
@@ -95,12 +97,23 @@ function DataTable({ history, method }) {
               </>
             );
           case 'Newton':
+            const showLambda = history.some(h => h.lambda !== undefined && h.lambda !== 1.0);
             return (
               <>
                 <td className="px-4 py-3">{item.iteration}</td>
                 <td className="px-4 py-3 font-mono text-sm">{formatNumber(item.x)}</td>
                 <td className="px-4 py-3 font-mono text-sm">{formatNumber(item.fx)}</td>
                 <td className="px-4 py-3 font-mono text-sm">{formatNumber(item.dfx)}</td>
+                {showLambda && (
+                  <td className="px-4 py-3 font-mono text-sm">
+                    <span className={item.lambda < 1.0 ? 'text-orange-600 font-bold' : ''}>
+                      {item.lambda ? item.lambda.toFixed(4) : '1.0000'}
+                    </span>
+                    {item.dampingAttempts && item.dampingAttempts.length > 1 && (
+                      <span className="ml-1 text-xs text-slate-500">({item.dampingAttempts.length}次)</span>
+                    )}
+                  </td>
+                )}
                 <td className="px-4 py-3 font-mono text-sm">{formatNumber(item.xNext)}</td>
                 <td className="px-4 py-3 font-mono text-sm">{formatNumber(item.error)}</td>
                 <td className="px-4 py-3 font-mono text-sm">{formatNumber(item.convergenceRate)}</td>

@@ -34,9 +34,9 @@ function Home() {
     },
     {
       id: 'secant',
-      name: '弦截法',
-      nameEn: 'Secant Method',
-      description: '使用割线代替切线，不需要导数，是牛顿法的变形',
+      name: '双点弦截法',
+      nameEn: 'Two-Point Secant Method',
+      description: '使用两点割线逼近根，不需要导数，是牛顿法的变形',
       convergence: '超线性收敛',
       icon: '📈',
       color: 'bg-primary-500',
@@ -53,7 +53,7 @@ function Home() {
             探索数值分析迭代求根方法
           </h1>
           <p className="text-xl text-neutral-600 mb-8">
-            通过交互式可视化，深入理解四种经典求根算法的原理与应用
+            通过交互式可视化，直观感受四种经典求根算法的收敛过程
           </p>
           <div className="flex items-center justify-center gap-8 text-lg">
             <div className="flex flex-col items-center">
@@ -127,7 +127,7 @@ function Home() {
                 🎯
               </div>
               <h4 className="text-lg font-bold text-neutral-800 mb-2">实时动画</h4>
-              <p className="text-neutral-600 text-sm">逐步观察算法的每一次迭代，深入理解收敛过程</p>
+              <p className="text-neutral-600 text-sm">逐步模拟每次迭代，可单步查看/自动播放，支持缩放拖动显示迭代点详细信息</p>
             </div>
             <div className="text-center">
               <div className="w-12 h-12 bg-gradient-to-br from-secondary-400 to-secondary-600 rounded-lg flex items-center justify-center text-white text-2xl mb-4 mx-auto">
@@ -141,7 +141,7 @@ function Home() {
                 ⚙️
               </div>
               <h4 className="text-lg font-bold text-neutral-800 mb-2">自定义函数</h4>
-              <p className="text-neutral-600 text-sm">支持预设函数和自定义数学表达式输入</p>
+              <p className="text-neutral-600 text-sm">包含常见预设函数，支持自定义数学表达式输入</p>
             </div>
           </div>
         </div>

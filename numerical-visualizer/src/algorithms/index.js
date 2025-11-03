@@ -36,11 +36,12 @@ export const ALGORITHMS = {
   },
   secant: {
     name: 'Secant',
-    displayName: '弦截法',
-    description: '使用割线逼近根，不需要导数',
+    displayName: '双点弦截法',
+    description: '使用两点割线逼近根，不需要导数',
     requiresInterval: false,
     requiresDerivative: false,
     convergenceOrder: 1.618, // 超线性收敛（黄金比例）
+    note: '* 单点弦截法由于需要预先给定斜率且对初值敏感、收敛性不稳定，故此处仅展示双点弦截法'
   }
 };
 

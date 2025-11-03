@@ -6,9 +6,9 @@ function Header() {
   const navItems = [
     { path: '/', label: '首页' },
     { path: '/bisection', label: '二分法' },
-    { path: '/newton', label: '牛顿法' },
     { path: '/aitken', label: '埃特肯法' },
-    { path: '/secant', label: '弦截法' },
+    { path: '/newton', label: '牛顿法' },
+    { path: '/secant', label: '双点弦截法' },
   ];
 
   const isActive = (path) => {
@@ -31,7 +31,7 @@ function Header() {
           </Link>
 
           {/* Navigation */}
-          <nav className="flex items-center justify-center gap-6">
+          <nav className="flex items-center justify-center gap-6 mx-auto">
             {navItems.map((item, index) => {
               const underlineColor = index % 2 === 0 ? 'border-secondary-500' : 'border-primary-500';
               return (

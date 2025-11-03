@@ -18,13 +18,17 @@ export function SettingsProvider({ children }) {
     maxIterations: 50
   });
 
+  const [useNewtonDamping, setUseNewtonDamping] = useState(false);
+
   return (
     <SettingsContext.Provider 
       value={{ 
         currentFunction, 
         setCurrentFunction, 
         parameters, 
-        setParameters 
+        setParameters,
+        useNewtonDamping,
+        setUseNewtonDamping
       }}
     >
       {children}
