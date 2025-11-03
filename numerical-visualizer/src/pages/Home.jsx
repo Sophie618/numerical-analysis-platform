@@ -14,7 +14,7 @@ function Home() {
     },
     {
       id: 'newton',
-      name: '牛顿法',
+      name: '牛顿法（可选下山条件）',
       nameEn: 'Newton Method',
       description: '使用函数的切线逼近根，收敛速度最快，需要导数信息',
       convergence: '二次收敛',

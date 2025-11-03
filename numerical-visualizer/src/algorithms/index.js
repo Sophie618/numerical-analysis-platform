@@ -20,7 +20,7 @@ export const ALGORITHMS = {
   },
   newton: {
     name: 'Newton',
-    displayName: '牛顿法',
+    displayName: '牛顿法（可选下山条件）',
     description: '使用切线逼近根，收敛速度快',
     requiresInterval: false,
     requiresDerivative: true,
