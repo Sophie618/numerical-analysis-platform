@@ -93,17 +93,17 @@ function GeometricVisualization({ method, history, currentStep, func, df }) {
       .call(d3.axisBottom(xScale).ticks(5))
       .selectAll('text, line, path')
       .attr('stroke', '#A13F0B')
-      .attr('stroke-opacity', 0.5)
+      .attr('stroke-opacity', 0.7)
       .attr('fill', '#A13F0B')
-      .attr('fill-opacity', 0.5);
+      .attr('fill-opacity', 0.7);
 
     g.append('g')
       .call(d3.axisLeft(yScale).ticks(5))
       .selectAll('text, line, path')
       .attr('stroke', '#A13F0B')
-      .attr('stroke-opacity', 0.5)
+      .attr('stroke-opacity', 0.7)
       .attr('fill', '#A13F0B')
-      .attr('fill-opacity', 0.5);
+      .attr('fill-opacity', 0.7);
 
     // 绘制x轴
     if (yMin < 0 && yMax > 0) {
@@ -278,17 +278,17 @@ function GeometricVisualization({ method, history, currentStep, func, df }) {
       .call(d3.axisBottom(xScale).ticks(5))
       .selectAll('text, line, path')
       .attr('stroke', '#A13F0B')
-      .attr('stroke-opacity', 0.5)
+      .attr('stroke-opacity', 0.7)
       .attr('fill', '#A13F0B')
-      .attr('fill-opacity', 0.5);
+      .attr('fill-opacity', 0.7);
 
     g.append('g')
       .call(d3.axisLeft(yScale).ticks(5))
       .selectAll('text, line, path')
       .attr('stroke', '#A13F0B')
-      .attr('stroke-opacity', 0.5)
+      .attr('stroke-opacity', 0.7)
       .attr('fill', '#A13F0B')
-      .attr('fill-opacity', 0.5);
+      .attr('fill-opacity', 0.7);
 
     // 绘制 y=x 直线
     g.append('line')
@@ -494,17 +494,17 @@ function GeometricVisualization({ method, history, currentStep, func, df }) {
       .call(d3.axisBottom(xScale).ticks(5))
       .selectAll('text, line, path')
       .attr('stroke', '#A13F0B')
-      .attr('stroke-opacity', 0.5)
+      .attr('stroke-opacity', 0.7)
       .attr('fill', '#A13F0B')
-      .attr('fill-opacity', 0.5);
+      .attr('fill-opacity', 0.7);
 
     g.append('g')
       .call(d3.axisLeft(yScale).ticks(5))
       .selectAll('text, line, path')
       .attr('stroke', '#A13F0B')
-      .attr('stroke-opacity', 0.5)
+      .attr('stroke-opacity', 0.7)
       .attr('fill', '#A13F0B')
-      .attr('fill-opacity', 0.5);
+      .attr('fill-opacity', 0.7);
 
     // x轴
     if (yMin < 0 && yMax > 0) {
@@ -717,17 +717,17 @@ function GeometricVisualization({ method, history, currentStep, func, df }) {
       .call(d3.axisBottom(xScale).ticks(5))
       .selectAll('text, line, path')
       .attr('stroke', '#A13F0B')
-      .attr('stroke-opacity', 0.5)
+      .attr('stroke-opacity', 0.7)
       .attr('fill', '#A13F0B')
-      .attr('fill-opacity', 0.5);
+      .attr('fill-opacity', 0.7);
 
     g.append('g')
       .call(d3.axisLeft(yScale).ticks(5))
       .selectAll('text, line, path')
       .attr('stroke', '#A13F0B')
-      .attr('stroke-opacity', 0.5)
+      .attr('stroke-opacity', 0.7)
       .attr('fill', '#A13F0B')
-      .attr('fill-opacity', 0.5);
+      .attr('fill-opacity', 0.7);
 
     // x轴
     if (yMin < 0 && yMax > 0) {
