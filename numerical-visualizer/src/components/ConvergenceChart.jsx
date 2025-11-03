@@ -55,14 +55,18 @@ function ConvergenceChart({ history, currentStep }) {
       .attr('transform', `translate(0, ${innerHeight})`)
       .call(d3.axisBottom(xScale).ticks(Math.min(10, data.length)))
       .selectAll('text, line, path')
-      .attr('stroke', '#94a3b8')
-      .attr('fill', '#94a3b8');
+      .attr('stroke', '#A13F0B')
+      .attr('stroke-opacity', 0.7)
+      .attr('fill', '#A13F0B')
+      .attr('fill-opacity', 0.7);
 
     g.append('g')
       .call(d3.axisLeft(yScale).ticks(5).tickFormat(d => d.toExponential(0)))
       .selectAll('text, line, path')
-      .attr('stroke', '#94a3b8')
-      .attr('fill', '#94a3b8');
+      .attr('stroke', '#A13F0B')
+      .attr('stroke-opacity', 0.7)
+      .attr('fill', '#A13F0B')
+      .attr('fill-opacity', 0.7);
 
     // Error curve
     const line = d3.line()

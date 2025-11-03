@@ -120,27 +120,29 @@ function Home() {
         </div>
 
         {/* Features */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-white rounded-xl p-6 shadow-md border border-neutral-200">
-            <div className="w-12 h-12 bg-gradient-to-br from-primary-400 to-primary-600 rounded-lg flex items-center justify-center text-white text-2xl mb-4">
-              🎯
+        <div className="bg-white rounded-2xl p-8  border-neutral-200">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="text-center">
+              <div className="w-12 h-12 bg-gradient-to-br from-primary-400 to-primary-600 rounded-lg flex items-center justify-center text-white text-2xl mb-4 mx-auto">
+                🎯
+              </div>
+              <h4 className="text-lg font-bold text-neutral-800 mb-2">实时动画</h4>
+              <p className="text-neutral-600 text-sm">逐步观察算法的每一次迭代，深入理解收敛过程</p>
             </div>
-            <h4 className="text-lg font-bold text-neutral-800 mb-2">实时动画</h4>
-            <p className="text-neutral-600 text-sm">逐步观察算法的每一次迭代，深入理解收敛过程</p>
-          </div>
-          <div className="bg-white rounded-xl p-6 shadow-md border border-neutral-200">
-            <div className="w-12 h-12 bg-gradient-to-br from-secondary-400 to-secondary-600 rounded-lg flex items-center justify-center text-white text-2xl mb-4">
-              📊
+            <div className="text-center">
+              <div className="w-12 h-12 bg-gradient-to-br from-secondary-400 to-secondary-600 rounded-lg flex items-center justify-center text-white text-2xl mb-4 mx-auto">
+                📊
+              </div>
+              <h4 className="text-lg font-bold text-neutral-800 mb-2">图表分析</h4>
+              <p className="text-neutral-600 text-sm">函数曲线、收敛速度、详细数据表格一目了然</p>
             </div>
-            <h4 className="text-lg font-bold text-neutral-800 mb-2">图表分析</h4>
-            <p className="text-neutral-600 text-sm">函数曲线、收敛速度、详细数据表格一目了然</p>
-          </div>
-          <div className="bg-white rounded-xl p-6 shadow-md border border-neutral-200">
-            <div className="w-12 h-12 bg-gradient-to-br from-primary-400 to-primary-600 rounded-lg flex items-center justify-center text-white text-2xl mb-4">
-              ⚙️
+            <div className="text-center">
+              <div className="w-12 h-12 bg-gradient-to-br from-primary-400 to-primary-600 rounded-lg flex items-center justify-center text-white text-2xl mb-4 mx-auto">
+                ⚙️
+              </div>
+              <h4 className="text-lg font-bold text-neutral-800 mb-2">自定义函数</h4>
+              <p className="text-neutral-600 text-sm">支持预设函数和自定义数学表达式输入</p>
             </div>
-            <h4 className="text-lg font-bold text-neutral-800 mb-2">自定义函数</h4>
-            <p className="text-neutral-600 text-sm">支持预设函数和自定义数学表达式输入</p>
           </div>
         </div>
       </section>

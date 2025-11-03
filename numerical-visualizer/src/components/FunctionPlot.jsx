@@ -81,14 +81,18 @@ function FunctionPlot({ func, history, currentStep, method, xRange }) {
       .attr('transform', `translate(0, ${innerHeight})`)
       .call(d3.axisBottom(xScale))
       .selectAll('text, line, path')
-      .attr('stroke', '#94a3b8')
-      .attr('fill', '#94a3b8');
+      .attr('stroke', '#A13F0B')
+      .attr('stroke-opacity', 0.7)
+      .attr('fill', '#A13F0B')
+      .attr('fill-opacity', 0.7);
 
     g.append('g')
       .call(d3.axisLeft(yScale))
       .selectAll('text, line, path')
-      .attr('stroke', '#94a3b8')
-      .attr('fill', '#94a3b8');
+      .attr('stroke', '#A13F0B')
+      .attr('stroke-opacity', 0.7)
+      .attr('fill', '#A13F0B')
+      .attr('fill-opacity', 0.7);
 
     // Zero line
     if (yMin < 0 && yMax > 0) {
@@ -110,28 +114,10 @@ function FunctionPlot({ func, history, currentStep, method, xRange }) {
     g.append('path')
       .datum(curveData)
       .attr('fill', 'none')
-      .attr('stroke', 'url(#gradient)')
+      .attr('stroke', '#006C39')
+      .attr('stroke-opacity', 0.5)
       .attr('stroke-width', 3)
       .attr('d', line);
-
-    // Gradient
-    const gradient = svg.append('defs')
-      .append('linearGradient')
-      .attr('id', 'gradient')
-      .attr('x1', '0%')
-      .attr('y1', '0%')
-      .attr('x2', '100%')
-      .attr('y2', '0%');
-
-    gradient.append('stop')
-      .attr('offset', '0%')
-      .attr('stop-color', '#3b82f6')
-      .attr('stop-opacity', 1);
-
-    gradient.append('stop')
-      .attr('offset', '100%')
-      .attr('stop-color', '#8b5cf6')
-      .attr('stop-opacity', 1);
 
     // Iteration points
     if (history && history.length > 0 && currentStep >= 0) {
