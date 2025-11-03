@@ -115,7 +115,7 @@ function AlgorithmPage({ algorithmKey }) {
               {/* Page Header */}
               <div className="p-6">
                 <div className="flex items-center gap-12">
-                  <div className="flex">
+                  <div className="flex-l">
                     <h2 className="text-4xl font-bold text-secondary-500 mb-2">
                       {algorithm.displayName}
                     </h2>
@@ -125,7 +125,7 @@ function AlgorithmPage({ algorithmKey }) {
                     )}
                   </div>
                   {algorithmKey !== 'bisection' && (
-                    <div className="text-center flex-shrink-0">
+                    <div className="text-center flex-shrink-0 ml-auto">
                       <div className="text-lg text-neutral-500">收敛阶</div>
                       <div className="text-2xl font-bold text-primary-600">{algorithm.convergenceOrder}</div>
                     </div>
