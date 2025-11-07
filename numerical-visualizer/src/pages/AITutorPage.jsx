@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Send, Loader2, Bot, User, AlertCircle } from 'lucide-react';
 
-// 配置 Groq API Key
+// 配置你的 Groq API Key
 const GROQ_API_KEY = import.meta.env.VITE_GROQ_API_KEY; 
 
 const AITutorPage = () => {
