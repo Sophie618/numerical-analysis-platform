@@ -5,6 +5,7 @@
 ![React](https://img.shields.io/badge/React-18.3-61dafb?logo=react)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS-38bdf8?logo=tailwindcss)
 ![D3.js](https://img.shields.io/badge/D3.js-v7-f9a03c?logo=d3.js)
+![AI Powered](https://img.shields.io/badge/AI-Powered-orange?logo=ai)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
 **一个现代化、美观的交互式数值分析可视化工具**
@@ -74,6 +75,23 @@
 - 可视化展示每次下山尝试的结果
 - 数据表格中标记下山步骤（橙色高亮）
 
+### 🤖 AI 智能伴学
+
+#### 核心能力
+- **🎓 算法讲解** - 清晰解释各算法的原理、特点、优缺点
+- **💡 问题答疑** - 回答关于实现细节、收敛性、误差分析等问题
+- **📊 结果分析** - 帮助理解可视化图表和迭代数据的含义
+- **🎯 学习指导** - 提供针对性的学习建议和实践方向
+
+#### 智能特性
+- **上下文记忆** - 记住整个对话历史，连贯回答问题
+- **数学公式支持** - 使用 LaTeX 格式展示数学公式
+- **代码示例** - 提供算法实现的代码片段
+
+#### 技术支持
+- **模型**: Meta Llama 3.3 70B (最新最强开源模型)
+- **服务商**: Groq (超快响应速度)
+
 ### 🎮 交互控制
 
 - ⏮ ⏪ ▶ ⏸ ⏩ ⏭ **完整播放控制**
@@ -95,6 +113,7 @@ Styling:             Tailwind CSS
 Visualization:       D3.js v7
 Math Parser:         math.js
 State Management:    Context API
+AI Service:          Groq AI (Llama 3.3 70B)
 ```
 
 ### 🏗️ 项目架构
@@ -127,7 +146,8 @@ numerical-analysis/
     │   │   ├── BisectionPage.jsx
     │   │   ├── AitkenPage.jsx
     │   │   ├── NewtonPage.jsx
-    │   │   └── SecantPage.jsx
+    │   │   ├── SecantPage.jsx
+    │   │   └── AITutorPage.jsx    # AI 智能伴学
     │   │
     │   ├── context/             # 全局状态管理
     │   │   └── SettingsContext.jsx
@@ -185,6 +205,7 @@ npm run preview
 - **埃特肯法** - 加速收敛的迭代方法
 - **牛顿法** - 基于切线的快速收敛方法（可选下山条件）
 - **双点弦截法** - 使用割线逼近，无需导数
+- **智能体伴学** - AI 助手实时解答疑问
 
 ### 2️⃣ 设置函数
 
@@ -248,6 +269,41 @@ log(x) - 1
 - **CSV**: 适合在 Excel 中分析
 - **JSON**: 保留完整的元数据信息
 
+### 7️⃣ AI 智能伴学
+
+点击导航栏的"智能体伴学"进入 AI 助手页面：
+
+**使用场景示例：**
+
+📚 **学习算法原理**
+```
+问：牛顿法为什么收敛这么快？
+答：AI 会详细解释二次收敛的数学原理
+```
+
+🤔 **解答疑问**
+```
+问：二分法和牛顿法应该怎么选择？
+答：AI 会对比两种算法的优缺点和适用场景
+```
+
+📊 **分析结果**
+```
+问：为什么我的牛顿法没有收敛？
+答：AI 会帮你分析可能的原因（初值、函数性质等）
+```
+
+💡 **学习建议**
+```
+问：如何深入学习数值分析？
+答：AI 会提供系统的学习路径和资源推荐
+```
+
+**交互技巧：**
+- 按 `Enter` 发送消息
+- `Shift + Enter` 换行
+- 点击"清空对话"重新开始
+- 支持中文和英文提问
 ---
 
 ## 🎓 算法详解
@@ -305,6 +361,7 @@ log(x) - 1
 - ✅ **交互式学习** - 自由调整参数，实时观察变化
 - ✅ **深度理解** - 几何意义可视化帮助理解算法原理
 - ✅ **高级特性** - 牛顿下山条件等进阶内容
+- ✅ **AI 辅助** - 智能助手实时解答疑问，加速学习
 
 ### 技术亮点
 
@@ -314,6 +371,7 @@ log(x) - 1
 - 💡 **交互增强** - 悬浮提示、动态反馈
 - 📱 **响应式** - 完美适配各种设备
 - 🧩 **模块化设计** - 组件化开发，易于维护扩展
+- 🤖 **AI 集成** - 新鲜学习体验
 
 ---
 
@@ -368,6 +426,8 @@ log(x) - 1
 - [D3.js](https://d3js.org/) - 数据可视化
 - [math.js](https://mathjs.org/) - 数学表达式解析
 - [React Router](https://reactrouter.com/) - 路由管理
+- [Groq](https://groq.com/) - AI 推理服务
+- [Meta Llama](https://llama.meta.com/) - 开源大语言模型
 
 ---
 

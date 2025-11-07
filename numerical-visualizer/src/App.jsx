@@ -5,6 +5,7 @@ import BisectionPage from './pages/BisectionPage';
 import NewtonPage from './pages/NewtonPage';
 import AitkenPage from './pages/AitkenPage';
 import SecantPage from './pages/SecantPage';
+import AITutorPage from './pages/AITutorPage';
 import { SettingsProvider } from './context/SettingsContext';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
             <Route path="/newton" element={<NewtonPage />} />
             <Route path="/aitken" element={<AitkenPage />} />
             <Route path="/secant" element={<SecantPage />} />
+            <Route path="/ai-tutor" element={<AITutorPage />} />
           </Routes>
         </div>
       </Router>
